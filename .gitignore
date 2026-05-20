@@ -37,7 +37,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-
 # typescript
 *.tsbuildinfo
 local-*
@@ -49,17 +48,8 @@ dev.out.log
 test
 prompt
 
-server.log
+# SQLite database
+data/
 
-# System files (not part of the project)
-/skills/
-/examples/
-/download/
-Caddyfile
-.zscripts/
-agent-ctx/
-# Database files (better-sqlite3)
-*.db
-*.db-wal
-*.db-shm
-/data/
+# PM2 logs
+logs/

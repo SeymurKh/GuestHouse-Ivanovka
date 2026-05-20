@@ -1,111 +1,64 @@
 'use client'
 
 // Guest House Gabala - Landing Page (Refactored)
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import { Mountain } from 'lucide-react'
 
 // Components
-import { 
-  Header, 
-  Hero, 
-  Rooms, 
-  Gallery, 
-  Contact, 
-  Footer, 
-  RoomModal, 
+import {
+  Header,
+  Hero,
+  Rooms,
+  Gallery,
+  Contact,
+  Footer,
+  RoomModal,
   AdminDialog,
   ScrollIndicator
 } from '@/components'
 
 // Hooks
 import { useToast } from '@/hooks/use-toast'
+import { useSiteData } from '@/hooks/use-site-data'
 
 // Types
-import { Room, Review, RoomImage } from '@/types'
+import { Room } from '@/types'
 
 // Utils
-import { parseImages } from '@/lib/parse'
 import { useLanguage } from '@/lib/LanguageContext'
 
 export default function GuestHouseLanding() {
   const { t } = useLanguage()
   const { toast } = useToast()
-  
-  // State
-  const [rooms, setRooms] = useState<Room[]>([])
-  const [reviews, setReviews] = useState<Review[]>([])
-  const [phone, setPhone] = useState('+994 50 123 45 67')
-  const [loading, setLoading] = useState(true)
+
+  // Data hook — rooms, reviews, phone, loading
+  const {
+    rooms,
+    setRooms,
+    reviews,
+    phone,
+    loading,
+    allRoomImages,
+    refreshReviews,
+  } = useSiteData()
+
+  // UI state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
+
   // Room detail modal state
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
   const [roomModalOpen, setRoomModalOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  
+
   // Admin state
   const [adminOpen, setAdminOpen] = useState(false)
   const [adminPassword, setAdminPassword] = useState('')
   const [adminToken, setAdminToken] = useState<string | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
-  
+
   // Slider state
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentReview, setCurrentReview] = useState(0)
-  
-  // Collect ALL images from all rooms with room info
-  const allRoomImages: RoomImage[] = useMemo(() => 
-    rooms.flatMap(room => 
-      parseImages(room.images).map(img => ({
-        image: img,
-        roomName: room.name,
-        price: room.price,
-        capacity: room.capacity,
-        roomId: room.id
-      }))
-    ),
-    [rooms]
-  )
-
-  // Initialize data
-  useEffect(() => {
-    async function initData() {
-      try {
-        const roomsRes = await fetch('/api/rooms')
-        if (!roomsRes.ok) {
-          throw new Error('Failed to fetch rooms')
-        }
-        const roomsData = await roomsRes.json()
-        setRooms(roomsData.slice(0, 2))
-
-        const reviewsRes = await fetch('/api/reviews')
-        if (!reviewsRes.ok) {
-          throw new Error('Failed to fetch reviews')
-        }
-        const reviewsData = await reviewsRes.json()
-        setReviews(reviewsData.slice(0, 5))
-
-        const settingsRes = await fetch('/api/settings')
-        if (!settingsRes.ok) {
-          throw new Error('Failed to fetch settings')
-        }
-        const settingsData = await settingsRes.json()
-        if (settingsData?.phone) setPhone(settingsData.phone)
-      } catch (error) {
-        console.error('[Init Data Error]', error)
-        toast({
-          title: 'Ошибка',
-          description: 'Не удалось загрузить данные сайта',
-          variant: 'destructive',
-          duration: 3000,
-        })
-      } finally {
-        setLoading(false)
-      }
-    }
-    initData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   // Auto-slide effect for hero
   useEffect(() => {
@@ -145,7 +98,7 @@ export default function GuestHouseLanding() {
         body: JSON.stringify({ password: adminPassword })
       })
       const data = await res.json()
-      
+
       if (data.success && typeof data.token === 'string' && data.token.length > 0) {
         setIsAdmin(true)
         setAdminToken(data.token)
@@ -188,15 +141,14 @@ export default function GuestHouseLanding() {
     setRooms(rooms.map(r => r.id === updatedRoom.id ? updatedRoom : r))
   }
 
-  // Refresh reviews from server
-  const refreshReviews = async () => {
-    try {
-      const res = await fetch('/api/reviews')
-      const data = await res.json()
-      setReviews(data.slice(0, 5))
-    } catch {
-      // Failed to refresh reviews
-    }
+  // Handle room creation from admin
+  const handleRoomCreate = (newRoom: Room) => {
+    setRooms([...rooms, newRoom])
+  }
+
+  // Handle room deletion from admin
+  const handleRoomDelete = (roomId: string) => {
+    setRooms(rooms.filter(r => r.id !== roomId))
   }
 
   // Loading state
@@ -214,7 +166,7 @@ export default function GuestHouseLanding() {
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden relative">
       {/* Fixed background image */}
-      <div 
+      <div
         className="fixed inset-0 z-0"
         style={{
           backgroundImage: 'url(/images/hero-bg.jpg)',
@@ -225,16 +177,16 @@ export default function GuestHouseLanding() {
       />
       {/* Dark overlay for text readability */}
       <div className="fixed inset-0 z-0 bg-black/40" />
-      
+
       {/* Header */}
-      <Header 
+      <Header
         phone={phone}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
       {/* Hero Section */}
-      <Hero 
+      <Hero
         phone={phone}
         allRoomImages={allRoomImages}
         currentSlide={currentSlide}
@@ -244,7 +196,7 @@ export default function GuestHouseLanding() {
       />
 
       {/* Rooms Section */}
-      <Rooms 
+      <Rooms
         rooms={rooms}
         onRoomClick={openRoomModal}
       />
@@ -253,7 +205,7 @@ export default function GuestHouseLanding() {
       <Gallery />
 
       {/* Contact Section */}
-      <Contact 
+      <Contact
         phone={phone}
         reviews={reviews}
         currentReview={currentReview}
@@ -264,7 +216,7 @@ export default function GuestHouseLanding() {
       <Footer />
 
       {/* Room Detail Modal */}
-      <RoomModal 
+      <RoomModal
         room={selectedRoom}
         open={roomModalOpen}
         onOpenChange={setRoomModalOpen}
@@ -274,7 +226,7 @@ export default function GuestHouseLanding() {
       />
 
       {/* Admin Dialog */}
-      <AdminDialog 
+      <AdminDialog
         open={adminOpen}
         onOpenChange={setAdminOpen}
         isAdmin={isAdmin}
@@ -284,6 +236,8 @@ export default function GuestHouseLanding() {
         onLogin={handleAdminLogin}
         rooms={rooms}
         onRoomUpdate={handleRoomUpdate}
+        onRoomCreate={handleRoomCreate}
+        onRoomDelete={handleRoomDelete}
         onReviewsUpdate={refreshReviews}
       />
 
