@@ -58,5 +58,8 @@ server.log
 Caddyfile
 .zscripts/
 agent-ctx/
-# Database files
+# Database files (better-sqlite3)
 *.db
+*.db-wal
+*.db-shm
+/data/
