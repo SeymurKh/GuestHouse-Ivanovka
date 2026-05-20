@@ -48,7 +48,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
               <Button asChild size="lg" className="gap-2 bg-[#25D366] hover:bg-[#20BD5A] px-8">
                 <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon className="w-5 h-5" />
-                  WhatsApp
+                  {t.hero.btnBook}
                 </a>
               </Button>
             </div>

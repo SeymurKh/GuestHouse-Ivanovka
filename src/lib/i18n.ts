@@ -19,10 +19,11 @@ export const translations = {
     // Hero
     hero: {
       location: 'Азербайджан, Исмаиллы',
-      title1: 'Добро пожаловать в',
-      title2: 'уголок спокойствия',
-      description: 'Оставьте суету позади и окунитесь в атмосферу тепла и уюта. Наш гостевой дом — место, где природа обнимает вас.',
-      btnRooms: 'Наши домики',
+      title1: 'Ivanovka',
+      title2: 'Vacation Homes',
+      description: 'Уютные дома для отдыха в сердце природы Исмаиллы. Погрузитесь в атмосферу спокойствия, уюта и загородного отдыха. Здесь природа, приватность и комфорт соединяются в одном пространстве — идеально для семей, друзей и тихих уикендов вдали от города.',
+      btnRooms: 'Каталог Домов',
+      btnBook: 'Забронировать',
       btnContact: 'Связаться',
       perNight: 'AZN / ночь',
       guests: 'гостей',
@@ -124,10 +125,11 @@ export const translations = {
     // Hero
     hero: {
       location: 'Azərbaycan, İsmayıllı',
-      title1: 'Xoş gəlmisiniz',
-      title2: 'sakitlik guşəsinə',
-      description: 'İstidirahanı arxada qoyun və istilik və rahatlıq atmosferinə dalın. Qonaq evimiz - təbiətin sizi qucaqladığı yer.',
-      btnRooms: 'Eviklərimiz',
+      title1: 'Ivanovka',
+      title2: 'Vacation Homes',
+      description: 'İsmayıllı təbiətinin ürəyində istirahət üçün rahat evlər. Sakitlik, rahatlıq və kənd həyatı atmosferinə dalın. Burada təbiət, məxfilik və rahatlıq bir məkanda birləşir — ailələr, dostlar və şəhərdən uzaq sakit həftəsonları üçün idealdır.',
+      btnRooms: 'Evlər Kataloqu',
+      btnBook: 'Rezervasiya',
       btnContact: 'Əlaqə',
       perNight: 'AZN / gecə',
       guests: 'qonaq',
@@ -229,10 +231,11 @@ export const translations = {
     // Hero
     hero: {
       location: 'Azerbaijan, Ismayilli',
-      title1: 'Welcome to a',
-      title2: 'corner of tranquility',
-      description: 'Leave the hustle behind and immerse yourself in warmth and comfort. Our guest house is a place where nature embraces you.',
-      btnRooms: 'Our Cottages',
+      title1: 'Ivanovka',
+      title2: 'Vacation Homes',
+      description: 'Cozy vacation homes in the heart of Ismayilli nature. Immerse yourself in tranquility, comfort and countryside living. Here nature, privacy and comfort come together in one space — perfect for families, friends and quiet weekends away from the city.',
+      btnRooms: 'Vacation Homes Catalog',
+      btnBook: 'Book Now',
       btnContact: 'Contact Us',
       perNight: 'AZN / night',
       guests: 'guests',

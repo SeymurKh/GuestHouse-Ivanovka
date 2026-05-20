@@ -46,7 +46,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[900px] lg:max-w-[1000px] max-h-[90vh] overflow-y-auto overflow-x-hidden w-[95vw] max-w-[95vw] sm:w-auto sm:max-w-[900px]">
+      <DialogContent className="sm:max-w-[900px] lg:max-w-[1200px] max-h-[90vh] overflow-y-auto overflow-x-hidden w-[95vw] max-w-[95vw] sm:w-auto sm:max-w-[900px] bg-[#F7E9D7]">
         {/* Header - with extra right padding to avoid close button */}
         <DialogHeader className="pb-4 border-b pr-12">
           <DialogTitle className="text-xl sm:text-2xl mb-2">{roomName}</DialogTitle>

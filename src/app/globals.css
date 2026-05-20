@@ -45,75 +45,75 @@
 
 :root {
   --radius: 0.625rem;
-  /* Forest/Nature color palette */
-  --background: oklch(0.98 0.005 85);
-  --foreground: oklch(0.2 0.02 85);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.02 85);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.02 85);
-  /* Forest green primary */
-  --primary: oklch(0.45 0.12 145);
-  --primary-foreground: oklch(0.98 0.005 85);
-  /* Warm beige secondary */
-  --secondary: oklch(0.92 0.02 75);
-  --secondary-foreground: oklch(0.3 0.03 75);
-  --muted: oklch(0.95 0.01 85);
-  --muted-foreground: oklch(0.5 0.02 85);
+  /* Warm brown/earth color palette */
+  --background: #FDF8F0;
+  --foreground: #2C1A0E;
+  --card: #FFFFFF;
+  --card-foreground: #2C1A0E;
+  --popover: #FFFFFF;
+  --popover-foreground: #2C1A0E;
+  /* Dark brown primary */
+  --primary: #402713;
+  --primary-foreground: #F7E9D7;
+  /* Medium brown secondary */
+  --secondary: #634B37;
+  --secondary-foreground: #F7E9D7;
+  --muted: #F0E6D8;
+  --muted-foreground: #8B7355;
   /* Golden/amber accent */
-  --accent: oklch(0.75 0.15 65);
-  --accent-foreground: oklch(0.2 0.02 65);
+  --accent: #C49A6C;
+  --accent-foreground: #2C1A0E;
   --destructive: oklch(0.55 0.22 25);
-  --border: oklch(0.88 0.02 85);
-  --input: oklch(0.88 0.02 85);
-  --ring: oklch(0.45 0.12 145);
-  --chart-1: oklch(0.45 0.12 145);
-  --chart-2: oklch(0.6 0.15 65);
-  --chart-3: oklch(0.5 0.1 35);
-  --chart-4: oklch(0.7 0.12 145);
-  --chart-5: oklch(0.65 0.1 85);
-  --sidebar: oklch(0.97 0.01 85);
-  --sidebar-foreground: oklch(0.2 0.02 85);
-  --sidebar-primary: oklch(0.45 0.12 145);
-  --sidebar-primary-foreground: oklch(0.98 0.005 85);
-  --sidebar-accent: oklch(0.92 0.02 75);
-  --sidebar-accent-foreground: oklch(0.3 0.03 75);
-  --sidebar-border: oklch(0.88 0.02 85);
-  --sidebar-ring: oklch(0.45 0.12 145);
+  --border: #D9CBB8;
+  --input: #D9CBB8;
+  --ring: #402713;
+  --chart-1: #402713;
+  --chart-2: #C49A6C;
+  --chart-3: #634B37;
+  --chart-4: #8B6F5A;
+  --chart-5: #B8956F;
+  --sidebar: #FAF3E8;
+  --sidebar-foreground: #2C1A0E;
+  --sidebar-primary: #402713;
+  --sidebar-primary-foreground: #F7E9D7;
+  --sidebar-accent: #634B37;
+  --sidebar-accent-foreground: #F7E9D7;
+  --sidebar-border: #D9CBB8;
+  --sidebar-ring: #402713;
 }
 
 .dark {
-  --background: oklch(0.15 0.02 145);
-  --foreground: oklch(0.95 0.01 85);
-  --card: oklch(0.2 0.02 145);
-  --card-foreground: oklch(0.95 0.01 85);
-  --popover: oklch(0.2 0.02 145);
-  --popover-foreground: oklch(0.95 0.01 85);
-  --primary: oklch(0.65 0.15 145);
-  --primary-foreground: oklch(0.15 0.02 145);
-  --secondary: oklch(0.25 0.03 75);
-  --secondary-foreground: oklch(0.95 0.01 85);
-  --muted: oklch(0.25 0.02 145);
-  --muted-foreground: oklch(0.65 0.02 85);
-  --accent: oklch(0.7 0.15 65);
-  --accent-foreground: oklch(0.15 0.02 65);
+  --background: #1A110A;
+  --foreground: #F0E6D8;
+  --card: #261A0B;
+  --card-foreground: #F0E6D8;
+  --popover: #261A0B;
+  --popover-foreground: #F0E6D8;
+  --primary: #9B7B63;
+  --primary-foreground: #1A110A;
+  --secondary: #4A3628;
+  --secondary-foreground: #F0E6D8;
+  --muted: #2E1F14;
+  --muted-foreground: #A08B73;
+  --accent: #C49A6C;
+  --accent-foreground: #1A110A;
   --destructive: oklch(0.6 0.2 25);
-  --border: oklch(0.3 0.02 145);
-  --input: oklch(0.3 0.02 145);
-  --ring: oklch(0.65 0.15 145);
-  --chart-1: oklch(0.65 0.15 145);
-  --chart-2: oklch(0.7 0.15 65);
-  --chart-3: oklch(0.6 0.12 35);
-  --chart-4: oklch(0.75 0.12 145);
-  --chart-5: oklch(0.7 0.1 85);
-  --sidebar: oklch(0.18 0.02 145);
-  --sidebar-foreground: oklch(0.95 0.01 85);
-  --sidebar-primary: oklch(0.65 0.15 145);
-  --sidebar-primary-foreground: oklch(0.15 0.02 145);
-  --sidebar-accent: oklch(0.25 0.03 75);
-  --sidebar-accent-foreground: oklch(0.95 0.01 85);
-  --sidebar-border: oklch(0.3 0.02 145);
-  --sidebar-ring: oklch(0.65 0.15 145);
+  --border: #3D2B1E;
+  --input: #3D2B1E;
+  --ring: #9B7B63;
+  --chart-1: #9B7B63;
+  --chart-2: #C49A6C;
+  --chart-3: #634B37;
+  --chart-4: #B8956F;
+  --chart-5: #A08B73;
+  --sidebar: #1F140C;
+  --sidebar-foreground: #F0E6D8;
+  --sidebar-primary: #9B7B63;
+  --sidebar-primary-foreground: #1A110A;
+  --sidebar-accent: #4A3628;
+  --sidebar-accent-foreground: #F0E6D8;
+  --sidebar-border: #3D2B1E;
+  --sidebar-ring: #9B7B63;
 }
 
 @layer base {
@@ -163,10 +163,10 @@ nextjs-portal {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.45 0.12 145);
+  background: #402713;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.55 0.15 145);
+  background: #634B37;
 }
