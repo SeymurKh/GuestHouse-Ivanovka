@@ -38,7 +38,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
             return (
               <Card 
                 key={room.id} 
-                className="overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 bg-[#F7E9D7] flex flex-col hover:scale-[1.02]"
+                className="overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 bg-[#F7E9D7] flex flex-col hover:scale-[1.02] py-0 gap-0"
                 onClick={() => onRoomClick(room)}
               >
                 {/* Image Section - Fixed Height */}
@@ -70,7 +70,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                     <CardTitle className="text-base md:text-xl">{roomName}</CardTitle>
                     <CardDescription className="line-clamp-1 text-sm hidden sm:block">{roomDescription}</CardDescription>
                   </CardHeader>
-                  <CardContent className="flex-1 flex flex-col justify-between px-3 sm:px-4 pb-2 sm:pb-4">
+                  <CardContent className="flex-1 flex flex-col justify-between px-3 sm:px-4 pb-1 sm:pb-2">
                     <div className="flex flex-wrap gap-1">
                       {parseLocalizedAmenities(room.amenities, lang).slice(0, 2).map((amenity: string, i: number) => (
                         <Badge key={i} variant="secondary" className="flex items-center gap-1 text-xs">
