@@ -22,9 +22,9 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
   const { t, lang } = useLanguage()
 
   return (
-    <section className="relative z-10 min-h-screen flex items-center pt-20 pb-8">
+    <section className="relative z-10 min-h-screen flex items-start lg:items-center pt-20 pb-8">
       <div className="container mx-auto px-4 h-full">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-8rem)]">
           {/* Left Side - Welcome Text */}
           <div className="space-y-6 lg:space-y-8">
             <Badge className="bg-[#cccbca]/20 text-[#cccbca] border-[#cccbca]/30">
@@ -58,7 +58,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
           </div>
 
           {/* Right Side - Sliding Images */}
-          <div className="relative h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
+          <div className="relative h-[200px] sm:h-[400px] md:h-[450px] lg:h-[500px] mt-12 sm:mt-0">
             <div className="absolute inset-0 flex items-center justify-center">
               {allRoomImages.map((item, idx) => {
                 const roomData = rooms.find(r => r.id === item.roomId)
