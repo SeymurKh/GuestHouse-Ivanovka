@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center gap-2">
           <Mountain className="w-5 h-5 text-primary" />
-          <span className="font-semibold">Guest House Ivanovka</span>
+          <span className="font-semibold">Ivanovka Guest Houses</span>
         </div>
       </div>
     </footer>

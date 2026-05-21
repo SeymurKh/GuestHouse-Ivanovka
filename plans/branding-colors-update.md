@@ -2,7 +2,7 @@
 
 ## Обзор
 
-Переход от «Guest House» к «Vacation Homes» с заменой зелёной палитры на тёплую коричневую.
+Переход от «Guest House» к «Guest Houses» с заменой зелёной палитры на тёплую коричневую.
 
 ---
 
@@ -14,8 +14,8 @@
 | Поле | Было | Стало |
 |------|------|-------|
 | `hero.title1` | `Добро пожаловать в` | `Ivanovka` |
-| `hero.title2` | `уголок спокойствия` | `Vacation Homes` |
-| `hero.description` | `Оставьте суету позади...` | `Уютные дома для отдыха в сердце природы Исмаиллы. Погрузитесь в атмосферу спокойствия, уюта и загородного отдыха. Здесь природа, приватность и комфорт соединяются в одном пространстве — идеально для семей, друзей и тихих уикендов вдали от города.` |
+| `hero.title2` | `уголок спокойствия` | `Guest Houses` |
+| `hero.description` | `Оставьте суету позади...` | `Уютные гостевые дома в сердце природы Исмаиллы. Погрузитесь в атмосферу спокойствия, уюта и загородного отдыха. Здесь природа, приватность и комфорт соединяются в одном пространстве — идеально для семей, друзей и тихих уикендов вдали от города.` |
 | `hero.btnRooms` | `Наши домики` | `Каталог Домов` |
 | `hero.btnBook` | *(новое поле)* | `Забронировать` |
 
@@ -23,17 +23,17 @@
 | Поле | Было | Стало |
 |------|------|-------|
 | `hero.title1` | `Welcome to a` | `Ivanovka` |
-| `hero.title2` | `corner of tranquility` | `Vacation Homes` |
-| `hero.description` | `Leave the hustle behind...` | `Cozy vacation homes in the heart of Ismayilli nature. Immerse yourself in tranquility, comfort and countryside living. Here nature, privacy and comfort come together in one space — perfect for families, friends and quiet weekends away from the city.` |
-| `hero.btnRooms` | `Our Cottages` | `Vacation Homes Catalog` |
+| `hero.title2` | `corner of tranquility` | `Guest Houses` |
+| `hero.description` | `Leave the hustle behind...` | `Cozy guest houses in the heart of Ismayilli nature. Immerse yourself in tranquility, comfort and countryside living. Here nature, privacy and comfort come together in one space — perfect for families, friends and quiet weekends away from the city.` |
+| `hero.btnRooms` | `Our Cottages` | `Guest Houses Catalog` |
 | `hero.btnBook` | *(новое поле)* | `Book Now` |
 
 **Азербайджанский (az):**
 | Поле | Было | Стало |
 |------|------|-------|
 | `hero.title1` | `Xoş gəlmisiniz` | `Ivanovka` |
-| `hero.title2` | `sakitlik guşəsinə` | `Vacation Homes` |
-| `hero.description` | `İstidirahanı arxada qoyun...` | `İsmayıllı təbiətinin ürəyində istirahət üçün rahat evlər. Sakitlik, rahatlıq və kənd həyatı atmosferinə dalın. Burada təbiət, məxfilik və rahatlıq bir məkanda birləşir — ailələr, dostlar və şəhərdən uzaq sakit həftəsonları üçün idealdır.` |
+| `hero.title2` | `sakitlik guşəsinə` | `Guest Houses` |
+| `hero.description` | `İstidirahanı arxada qoyun...` | `İsmayıllı təbiətinin ürəyində istirahət üçün qonaq evləri. Sakitlik, rahatlıq və kənd həyatı atmosferinə dalın. Burada təbiət, məxfilik və rahatlıq bir məkanda birləşir — ailələr, dostlar və şəhərdən uzaq sakit həftəsonları üçün idealdır.` |
 | `hero.btnRooms` | `Eviklərimiz` | `Evlər Kataloqu` |
 | `hero.btnBook` | *(новое поле)* | `Rezervasiya` |
 
@@ -57,7 +57,7 @@
 
 Структура H1 остаётся двухстрочной, но теперь:
 - Строка 1: `Ivanovka` (белая)
-- Строка 2: `Vacation Homes` (цвет primary, который станет коричневым)
+- Строка 2: `Guest Houses` (цвет primary, который станет коричневым)
 
 ### 1.3 Заменить текст кнопки WhatsApp в [`src/components/Hero.tsx`](src/components/Hero.tsx:48-53)
 
@@ -180,18 +180,18 @@
 
 ---
 
-## 4. Ребрендинг Guest House → Vacation Homes
+## 4. Ребрендинг Guest House → Guest Houses
 
 ### 4.1 Метаданные в [`src/app/layout.tsx`](src/app/layout.tsx:18-28)
 
 | Поле | Было | Стало |
 |------|------|-------|
-| `title` | `Guest House Ivanovka \| Отдых в горах Азербайджана` | `Ivanovka Vacation Homes \| Отдых в горах Азербайджана` |
-| `description` | `Уютный гостевой дом в Исмаиллы...` | `Уютные дома для отдыха в Исмаиллы...` |
-| `keywords` | `гостевой дом` | `дома для отдыха` |
-| `authors` | `Guest House Ivanovka` | `Ivanovka Vacation Homes` |
-| OpenGraph `title` | `Guest House Ivanovka...` | `Ivanovka Vacation Homes...` |
-| OpenGraph `description` | `Уютный гостевой дом...` | `Уютные дома для отдыха...` |
+| `title` | `Guest House Ivanovka \| Отдых в горах Азербайджана` | `Ivanovka Guest Houses \| Отдых в горах Азербайджана` |
+| `description` | `Уютный гостевой дом в Исмаиллы...` | `Уютные гостевые дома в Исмаиллы...` |
+| `keywords` | `гостевой дом` | `гостевые дома` |
+| `authors` | `Guest House Ivanovka` | `Ivanovka Guest Houses` |
+| OpenGraph `title` | `Guest House Ivanovka...` | `Ivanovka Guest Houses...` |
+| OpenGraph `description` | `Уютный гостевой дом...` | `Уютные гостевые дома...` |
 
 ### 4.2 Начальные данные в [`src/app/api/init/route.ts`](src/app/api/init/route.ts:72-76)
 
@@ -199,7 +199,7 @@
 // Было:
 description: 'Уютный гостевой дом в горах Азербайджана...'
 // Стало:
-description: 'Уютные дома для отдыха в горах Азербайджана...'
+description: 'Уютные гостевые дома в горах Азербайджана...'
 ```
 
 ### 4.3 Комментарии и localStorage ключи

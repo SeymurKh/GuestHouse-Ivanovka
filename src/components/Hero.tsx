@@ -35,7 +35,10 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
               {t.hero.title1}<br />
               <span>{t.hero.title2}</span>
             </h1>
-            <p className="text-base md:text-lg lg:text-xl text-[#cccbca] max-w-lg">
+            <p className="text-xl md:text-2xl font-medium text-white/90 max-w-lg">
+              {t.hero.subtitle}
+            </p>
+            <p className="text-base md:text-lg text-[#cccbca] max-w-lg">
               {t.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">

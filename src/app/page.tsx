@@ -1,6 +1,6 @@
 'use client'
 
-// Ivanovka Vacation Homes - Landing Page (Refactored)
+// Ivanovka Guest Houses - Landing Page (Refactored)
 import { useState, useEffect } from 'react'
 import { Mountain } from 'lucide-react'
 

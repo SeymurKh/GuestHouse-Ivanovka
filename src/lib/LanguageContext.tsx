@@ -13,15 +13,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Initialize with saved language or default
-  const [lang, setLangState] = useState<Language>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('guesthouse-lang') as Language | null
-      if (saved && ['ru', 'az', 'en'].includes(saved)) {
-        return saved
-      }
-    }
-    return 'ru'
-  })
+  const [lang, setLangState] = useState<Language>('ru')
 
   // Sync with localStorage on mount only
   useEffect(() => {
