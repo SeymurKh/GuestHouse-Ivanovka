@@ -48,28 +48,31 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[85vw] lg:max-w-[70vw] max-h-[85vh] overflow-y-auto overflow-x-hidden bg-[#F7E9D7]">
         {/* Header - with extra right padding to avoid close button */}
-        <DialogHeader className="pb-2 sm:pb-4 border-b pr-12">
-          <DialogTitle className="text-lg sm:text-2xl mb-1 sm:mb-2">{roomName}</DialogTitle>
+        <DialogHeader className="pb-2 sm:pb-3 border-b pr-12 gap-1 sm:gap-1.5">
+          <DialogTitle className="text-lg sm:text-2xl">{roomName}</DialogTitle>
           <DialogDescription className="sr-only">{t.modal.description}</DialogDescription>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <Badge className="bg-primary text-white text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1">{room.price} {t.hero.perNight}</Badge>
             <Badge variant="outline" className="text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1">
               <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
               {t.rooms.upTo} {room.capacity} {t.rooms.guests}
             </Badge>
           </div>
-          {/* Book Button - separate row on mobile */}
+        </DialogHeader>
+  
+        {/* Book Button - separate block between header and content */}
+        <div className="flex justify-center sm:justify-end pb-2 sm:pb-3 border-b">
           <Button
             asChild
             size="sm"
-            className="w-full sm:w-auto sm:ml-auto gap-1 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white text-xs sm:text-sm mt-2 sm:mt-0"
+            className="w-full sm:w-auto gap-1.5 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white text-xs sm:text-sm"
           >
             <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
               <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               {t.modal.book}
             </a>
           </Button>
-        </DialogHeader>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 py-2 sm:py-4">
           {/* LEFT COLUMN - GALLERY */}
