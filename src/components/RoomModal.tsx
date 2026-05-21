@@ -61,7 +61,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
             <Button 
               asChild 
               size="sm"
-              className="gap-1 sm:gap-2 bg-[#F7E9D7] hover:bg-[#E8D5BF] text-[#402713] ml-auto text-xs sm:text-sm"
+              className="gap-1 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white ml-auto text-xs sm:text-sm"
             >
               <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
                 <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />

@@ -67,7 +67,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
       </div>
       
       {mobileMenuOpen && (
-        <div className="md:hidden bg-black/60 backdrop-blur-md border-b border-white/10 p-4">
+        <div className="md:hidden bg-black/60 backdrop-blur-md border-t border-b border-white/10 p-4">
           <nav className="flex flex-col gap-4">
             <a href="#rooms" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.rooms}</a>
             <a href="#gallery" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.gallery}</a>

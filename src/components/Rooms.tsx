@@ -42,7 +42,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 onClick={() => onRoomClick(room)}
               >
                 {/* Image Section - Fixed Height */}
-                <div className="relative h-36 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
+                <div className="relative h-28 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
                   <Image 
                     src={parseImages(room.images)[0] || '/images/hero-bg.jpg'} 
                     alt={roomName}
@@ -66,8 +66,8 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 
                 {/* Content Section - Flexible */}
                 <div className="flex flex-col flex-1">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg md:text-xl">{roomName}</CardTitle>
+                  <CardHeader className="pb-1">
+                    <CardTitle className="text-base md:text-xl">{roomName}</CardTitle>
                     <CardDescription className="line-clamp-2 text-sm">{roomDescription}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col justify-between">
