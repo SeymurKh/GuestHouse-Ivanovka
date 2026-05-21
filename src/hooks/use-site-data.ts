@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Room, Review, RoomImage } from '@/types'
 import { parseImages } from '@/lib/parse'
+import { demoRooms, demoReviews, demoSettings } from '@/lib/demo-data'
 
 export function useSiteData() {
   const [rooms, setRooms] = useState<Room[]>([])
@@ -28,6 +29,15 @@ export function useSiteData() {
   // Initialize data
   useEffect(() => {
     async function loadData() {
+      // Demo mode: use static data (for Vercel deployment without database)
+      if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+        setRooms(demoRooms)
+        setReviews(demoReviews)
+        if (demoSettings.phone) setPhone(demoSettings.phone)
+        setLoading(false)
+        return
+      }
+
       try {
         const [roomsRes, reviewsRes, settingsRes] = await Promise.all([
           fetch('/api/rooms'),
