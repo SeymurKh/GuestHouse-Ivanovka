@@ -58,7 +58,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
           </div>
 
           {/* Right Side - Sliding Images */}
-          <div className="relative h-[200px] sm:h-[400px] md:h-[450px] lg:h-[500px] mt-12 sm:mt-0">
+          <div className="relative h-[150px] sm:h-[400px] md:h-[450px] lg:h-[500px] mt-auto">
             <div className="absolute inset-0 flex items-center justify-center">
               {allRoomImages.map((item, idx) => {
                 const roomData = rooms.find(r => r.id === item.roomId)
@@ -78,7 +78,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
                     <div
                       className="overflow-hidden rounded-2xl shadow-2xl transition-all duration-300"
                     >
-                      <div className="relative h-56 sm:h-64">
+                      <div className="relative h-36 sm:h-64">
                         <Image
                           src={item.image || '/images/hero-bg.jpg'}
                           alt={roomName}
@@ -107,7 +107,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
             </div>
 
             {/* Slide Indicators */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center max-w-[200px]">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 hidden sm:flex gap-2 flex-wrap justify-center max-w-[200px]">
               {allRoomImages.map((_, idx) => (
                 <button
                   key={idx}
