@@ -167,7 +167,7 @@ export default function GuestHouseLanding() {
     <div className="min-h-screen flex flex-col overflow-x-hidden relative">
       {/* Fixed background image */}
       <div
-        className="fixed inset-0 z-0"
+        className="fixed -inset-5 z-0"
         style={{
           backgroundImage: 'url(/images/hero-bg.jpg)',
           backgroundSize: 'cover',

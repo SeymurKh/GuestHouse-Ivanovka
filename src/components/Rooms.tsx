@@ -42,7 +42,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 onClick={() => onRoomClick(room)}
               >
                 {/* Image Section - Fixed Height */}
-                <div className="relative h-36 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
+                <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
                   <Image 
                     src={parseImages(room.images)[0] || '/images/hero-bg.jpg'} 
                     alt={roomName}
@@ -66,20 +66,20 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 
                 {/* Content Section - Flexible */}
                 <div className="flex flex-col flex-1">
-                  <CardHeader className="pb-1">
+                  <CardHeader className="pb-1 pt-2 px-3 sm:px-4">
                     <CardTitle className="text-base md:text-xl">{roomName}</CardTitle>
-                    <CardDescription className="line-clamp-1 text-sm">{roomDescription}</CardDescription>
+                    <CardDescription className="line-clamp-1 text-sm hidden sm:block">{roomDescription}</CardDescription>
                   </CardHeader>
-                  <CardContent className="flex-1 flex flex-col justify-between">
+                  <CardContent className="flex-1 flex flex-col justify-between px-3 sm:px-4 pb-3 sm:pb-4">
                     <div className="flex flex-wrap gap-1">
-                      {parseLocalizedAmenities(room.amenities, lang).slice(0, 3).map((amenity: string, i: number) => (
+                      {parseLocalizedAmenities(room.amenities, lang).slice(0, 2).map((amenity: string, i: number) => (
                         <Badge key={i} variant="secondary" className="flex items-center gap-1 text-xs">
                           {getAmenityIcon(amenity)}
                           {amenity}
                         </Badge>
                       ))}
                     </div>
-                    <div className="flex items-center justify-center gap-2 text-primary font-medium mt-4 pt-3 border-t">
+                    <div className="flex items-center justify-center gap-2 text-primary font-medium mt-2 pt-2 border-t">
                       {t.rooms.details}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>

@@ -46,36 +46,36 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[85vw] lg:max-w-[70vw] max-h-[90vh] overflow-y-auto overflow-x-hidden bg-[#F7E9D7]">
+      <DialogContent className="sm:max-w-[85vw] lg:max-w-[70vw] max-h-[85vh] overflow-y-auto overflow-x-hidden bg-[#F7E9D7]">
         {/* Header - with extra right padding to avoid close button */}
-        <DialogHeader className="pb-4 border-b pr-12">
-          <DialogTitle className="text-xl sm:text-2xl mb-2">{roomName}</DialogTitle>
+        <DialogHeader className="pb-2 sm:pb-4 border-b pr-12">
+          <DialogTitle className="text-lg sm:text-2xl mb-1 sm:mb-2">{roomName}</DialogTitle>
           <DialogDescription className="sr-only">{t.modal.description}</DialogDescription>
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <Badge className="bg-primary text-white text-xs sm:text-sm px-2 sm:px-3 py-1">{room.price} {t.hero.perNight}</Badge>
-            <Badge variant="outline" className="text-xs sm:text-sm px-2 sm:px-3 py-1">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Badge className="bg-primary text-white text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1">{room.price} {t.hero.perNight}</Badge>
+            <Badge variant="outline" className="text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1">
               <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
               {t.rooms.upTo} {room.capacity} {t.rooms.guests}
             </Badge>
-            {/* Book Button in header */}
-            <Button 
-              asChild 
-              size="sm"
-              className="gap-1 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white ml-auto text-xs sm:text-sm"
-            >
-              <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
-                <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-                {t.modal.book}
-              </a>
-            </Button>
           </div>
+          {/* Book Button - separate row on mobile */}
+          <Button
+            asChild
+            size="sm"
+            className="w-full sm:w-auto sm:ml-auto gap-1 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white text-xs sm:text-sm mt-2 sm:mt-0"
+          >
+            <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
+              <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+              {t.modal.book}
+            </a>
+          </Button>
         </DialogHeader>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 py-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 py-2 sm:py-4">
           {/* LEFT COLUMN - GALLERY */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {/* Main Image - Fixed Size */}
-            <div className="relative w-full h-[220px] sm:h-[300px] lg:h-[350px] rounded-xl overflow-hidden bg-muted">
+            <div className="relative w-full h-[180px] sm:h-[300px] lg:h-[350px] rounded-xl overflow-hidden bg-muted">
               <Image 
                 src={images[currentImageIndex] || '/images/hero-bg.jpg'} 
                 alt={roomName} 
@@ -109,9 +109,9 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
               </div>
             </div>
             
-            {/* Thumbnails - All images in grid rows */}
+            {/* Thumbnails - All images in grid rows (hidden on mobile to save space) */}
             {images.length > 1 && (
-              <div className="grid grid-cols-5 sm:grid-cols-5 gap-1.5 sm:gap-2">
+              <div className="hidden sm:grid grid-cols-5 gap-1.5 sm:gap-2">
                 {images.map((img: string, idx: number) => (
                   <button 
                     key={idx} 
@@ -126,11 +126,11 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
           </div>
           
           {/* RIGHT COLUMN - INFO BLOCKS */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-2 sm:space-y-4">
             {/* Block 1 - Description */}
             {roomDescription && (
               <Card>
-                <CardContent className="p-3 sm:p-4">
+                <CardContent className="p-2 sm:p-4">
                   <h4 className="font-semibold text-sm sm:text-base mb-2 flex items-center gap-2">
                     {t.modal.description}
                   </h4>
@@ -142,7 +142,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
             {/* Block 2 - Advantages */}
             {roomAdvantages.length > 0 && (
               <Card>
-                <CardContent className="p-3 sm:p-4">
+                <CardContent className="p-2 sm:p-4">
                   <h4 className="font-semibold text-sm sm:text-base mb-2 sm:mb-3">{t.modal.advantages}</h4>
                   <div className="grid grid-cols-1 gap-1.5 sm:gap-2">
                     {roomAdvantages.map((adv: string, i: number) => (
@@ -161,7 +161,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
             {/* Block 3 - Amenities */}
             {amenities.length > 0 && (
               <Card>
-                <CardContent className="p-3 sm:p-4">
+                <CardContent className="p-2 sm:p-4">
                   <h4 className="font-semibold text-sm sm:text-base mb-2 sm:mb-3">{t.modal.amenities}</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
                     {amenities.map((amenity: string, i: number) => (
@@ -180,7 +180,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
             {/* Block 4 - Conditions */}
             {roomConditions && (
               <Card>
-                <CardContent className="p-3 sm:p-4">
+                <CardContent className="p-2 sm:p-4">
                   <h4 className="font-semibold text-sm sm:text-base mb-2">{t.modal.conditions}</h4>
                   <div className="bg-muted/50 rounded-lg p-2 sm:p-3">
                     <pre className="text-xs sm:text-sm text-muted-foreground whitespace-pre-wrap font-sans leading-relaxed">{roomConditions}</pre>
