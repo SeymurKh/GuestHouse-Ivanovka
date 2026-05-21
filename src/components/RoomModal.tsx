@@ -48,8 +48,8 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[85vw] lg:max-w-[70vw] max-h-[85vh] overflow-y-auto overflow-x-hidden bg-[#F7E9D7]">
         {/* Header - with extra right padding to avoid close button */}
-        <DialogHeader className="pb-2 sm:pb-3 border-b pr-12 gap-1 sm:gap-1.5">
-          <DialogTitle className="text-lg sm:text-2xl">{roomName}</DialogTitle>
+        <DialogHeader className="pb-2 sm:pb-3 border-b gap-0.5 sm:gap-1">
+          <DialogTitle className="text-lg sm:text-2xl leading-snug">{roomName}</DialogTitle>
           <DialogDescription className="sr-only">{t.modal.description}</DialogDescription>
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <Badge className="bg-primary text-white text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1">{room.price} {t.hero.perNight}</Badge>
@@ -78,7 +78,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
           {/* LEFT COLUMN - GALLERY */}
           <div className="space-y-2 sm:space-y-3">
             {/* Main Image - Fixed Size */}
-            <div className="relative w-full h-[180px] sm:h-[300px] lg:h-[350px] rounded-xl overflow-hidden bg-muted">
+            <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[450px] rounded-xl overflow-hidden bg-muted">
               <Image 
                 src={images[currentImageIndex] || '/images/hero-bg.jpg'} 
                 alt={roomName} 

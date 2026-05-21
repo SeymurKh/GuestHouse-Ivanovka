@@ -38,10 +38,10 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
             <p className="text-xl md:text-2xl font-medium text-white/90 max-w-lg">
               {t.hero.subtitle}
             </p>
-            <p className="text-base md:text-lg text-[#cccbca] max-w-lg">
+            <p className="hidden sm:block text-base md:text-lg text-[#cccbca] max-w-lg">
               {t.hero.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 mt-2 sm:mt-0">
               <Button asChild size="lg" className="gap-2 bg-primary hover:bg-primary/90 px-8">
                 <a href="#rooms">
                   <Home className="w-5 h-5" />
