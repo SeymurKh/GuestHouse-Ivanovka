@@ -21,7 +21,7 @@ export function Gallery() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <Badge className="mb-4">{t.gallery.badge}</Badge>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">{t.gallery.title}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.gallery.title}</h2>
           <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base">
             {t.gallery.description}
           </p>

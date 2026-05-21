@@ -26,7 +26,7 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
           {/* Left - Contact Info */}
           <div>
             <Badge className="mb-4 bg-white/20 text-white border-white/30">{t.contact.badge}</Badge>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">{t.contact.title}</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-[#b8ad9a]">{t.contact.title}</h2>
             <p className="text-white/80 mb-6 text-sm md:text-base">
               {t.contact.description}
             </p>
@@ -38,7 +38,7 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
                 </div>
                 <div>
                   <p className="text-xs text-white/60">WhatsApp</p>
-                  <p className="font-medium">{phone}</p>
+                  <p className="font-medium text-[#b8ad9a]">{phone}</p>
                 </div>
               </a>
               <a href="mailto:info@guesthouse-ivanovka.az" className="flex items-center gap-3 group">
@@ -47,7 +47,7 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
                 </div>
                 <div>
                   <p className="text-xs text-white/60">{t.contact.email}</p>
-                  <p className="font-medium">info@guesthouse-ivanovka.az</p>
+                  <p className="font-medium text-[#b8ad9a]">info@guesthouse-ivanovka.az</p>
                 </div>
               </a>
               <div className="flex items-center gap-3">
@@ -56,7 +56,7 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
                 </div>
                 <div>
                   <p className="text-xs text-white/60">{t.contact.address}</p>
-                  <p className="font-medium">{t.contact.addressValue}</p>
+                  <p className="font-medium text-[#b8ad9a]">{t.contact.addressValue}</p>
                 </div>
               </div>
             </div>

@@ -31,9 +31,9 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
               <Trees className="w-3 h-3 mr-1" />
               {t.hero.location}
             </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#b8ad9a]">
               {t.hero.title1}<br />
-              <span className="text-[#b8ad9a]">{t.hero.title2}</span>
+              <span>{t.hero.title2}</span>
             </h1>
             <p className="text-base md:text-lg lg:text-xl text-[#cccbca] max-w-lg">
               {t.hero.description}

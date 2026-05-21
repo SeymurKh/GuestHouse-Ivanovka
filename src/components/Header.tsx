@@ -20,7 +20,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
           <Image src="/vacationhomelogo.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded" />
-          <span className="font-bold text-xl text-white">Ivanovka Vacation Homes</span>
+          <span className="font-bold text-xl text-[#b8ad9a]">Ivanovka Vacation Homes</span>
         </a>
         
         <nav className="hidden md:flex items-center gap-6">
@@ -67,7 +67,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
       </div>
       
       {mobileMenuOpen && (
-        <div className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 p-4">
+        <div className="md:hidden bg-black/60 backdrop-blur-md border-b border-white/10 p-4">
           <nav className="flex flex-col gap-4">
             <a href="#rooms" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.rooms}</a>
             <a href="#gallery" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.gallery}</a>

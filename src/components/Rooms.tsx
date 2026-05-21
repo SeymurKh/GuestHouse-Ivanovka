@@ -23,7 +23,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <Badge className="mb-4">{t.rooms.badge}</Badge>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">{t.rooms.title}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.rooms.title}</h2>
           <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base">
             {t.rooms.description}
           </p>
@@ -38,11 +38,11 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
             return (
               <Card 
                 key={room.id} 
-                className="overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 bg-white/95 flex flex-col hover:scale-[1.02]"
+                className="overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 bg-[#F7E9D7] flex flex-col hover:scale-[1.02]"
                 onClick={() => onRoomClick(room)}
               >
                 {/* Image Section - Fixed Height */}
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden flex-shrink-0">
+                <div className="relative h-36 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
                   <Image 
                     src={parseImages(room.images)[0] || '/images/hero-bg.jpg'} 
                     alt={roomName}
