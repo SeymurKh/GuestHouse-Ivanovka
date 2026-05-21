@@ -19,8 +19,8 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded" />
-          <span className="font-bold text-xl text-white">Guest House Ivanovka</span>
+          <Image src="/vacationhomelogo.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded" />
+          <span className="font-bold text-xl text-white">Ivanovka Vacation Homes</span>
         </a>
         
         <nav className="hidden md:flex items-center gap-6">
@@ -54,10 +54,10 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
             ))}
           </div>
 
-          <Button asChild className="hidden sm:flex gap-2 bg-[#25D366] hover:bg-[#20BD5A]">
+          <Button asChild className="hidden sm:flex gap-2 bg-[#F7E9D7] hover:bg-[#E8D5BF] text-[#402713]">
             <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="w-5 h-5" />
-              WhatsApp
+              {t.hero.btnBook}
             </a>
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -72,10 +72,10 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
             <a href="#rooms" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.rooms}</a>
             <a href="#gallery" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.gallery}</a>
             <a href="#contact" className="text-white/70 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>{t.nav.contact}</a>
-            <Button asChild className="gap-2 bg-[#25D366] hover:bg-[#20BD5A] w-full">
+            <Button asChild className="gap-2 bg-[#F7E9D7] hover:bg-[#E8D5BF] text-[#402713] w-full">
               <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon className="w-5 h-5" />
-                WhatsApp
+                {t.hero.btnBook}
               </a>
             </Button>
           </nav>

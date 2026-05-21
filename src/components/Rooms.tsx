@@ -55,7 +55,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-primary text-white text-sm">{room.price} {t.rooms.perNight}</Badge>
+                      <Badge className="bg-[#F7E9D7] text-[#402713] text-sm">{room.price} {t.rooms.perNight}</Badge>
                       <Badge variant="secondary" className="bg-white/20 text-white border-0 text-sm">
                         <Users className="w-3 h-3 mr-1" />
                         {t.rooms.upTo} {room.capacity} {t.rooms.guests}

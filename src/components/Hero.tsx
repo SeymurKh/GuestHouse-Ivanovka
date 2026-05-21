@@ -27,15 +27,15 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
           {/* Left Side - Welcome Text */}
           <div className="space-y-6 lg:space-y-8">
-            <Badge className="bg-primary/20 text-primary border-primary/30">
+            <Badge className="bg-[#cccbca]/20 text-[#cccbca] border-[#cccbca]/30">
               <Trees className="w-3 h-3 mr-1" />
               {t.hero.location}
             </Badge>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
               {t.hero.title1}<br />
-              <span className="text-primary">{t.hero.title2}</span>
+              <span className="text-[#b8ad9a]">{t.hero.title2}</span>
             </h1>
-            <p className="text-base md:text-lg lg:text-xl text-white/80 max-w-lg">
+            <p className="text-base md:text-lg lg:text-xl text-[#cccbca] max-w-lg">
               {t.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -45,7 +45,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
                   {t.hero.btnRooms}
                 </a>
               </Button>
-              <Button asChild size="lg" className="gap-2 bg-[#25D366] hover:bg-[#20BD5A] px-8">
+              <Button asChild size="lg" className="gap-2 bg-[#F7E9D7] hover:bg-[#E8D5BF] text-[#402713] px-8">
                 <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon className="w-5 h-5" />
                   {t.hero.btnBook}

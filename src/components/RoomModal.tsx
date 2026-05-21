@@ -46,7 +46,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[900px] lg:max-w-[1200px] max-h-[90vh] overflow-y-auto overflow-x-hidden w-[95vw] max-w-[95vw] sm:w-auto sm:max-w-[900px] bg-[#F7E9D7]">
+      <DialogContent className="sm:max-w-[85vw] lg:max-w-[70vw] max-h-[90vh] overflow-y-auto overflow-x-hidden bg-[#F7E9D7]">
         {/* Header - with extra right padding to avoid close button */}
         <DialogHeader className="pb-4 border-b pr-12">
           <DialogTitle className="text-xl sm:text-2xl mb-2">{roomName}</DialogTitle>
@@ -61,7 +61,7 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
             <Button 
               asChild 
               size="sm"
-              className="gap-1 sm:gap-2 bg-[#25D366] hover:bg-[#20BD5A] ml-auto text-xs sm:text-sm"
+              className="gap-1 sm:gap-2 bg-[#F7E9D7] hover:bg-[#E8D5BF] text-[#402713] ml-auto text-xs sm:text-sm"
             >
               <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
                 <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
