@@ -20,7 +20,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
           <Image src="/vacationhomelogo.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded" />
-          <span className="font-bold text-xl text-[#b8ad9a]">Ivanovka Guest Houses</span>
+          <span className="font-bold text-sm sm:text-lg md:text-xl text-[#b8ad9a]">Ivanovka Guest Houses</span>
         </a>
         
         <nav className="hidden md:flex items-center gap-6">

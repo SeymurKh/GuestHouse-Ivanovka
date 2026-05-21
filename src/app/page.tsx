@@ -172,7 +172,6 @@ export default function GuestHouseLanding() {
           backgroundImage: 'url(/images/hero-bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
         }}
       />
       {/* Dark overlay for text readability */}

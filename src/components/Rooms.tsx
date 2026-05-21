@@ -42,7 +42,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 onClick={() => onRoomClick(room)}
               >
                 {/* Image Section - Fixed Height */}
-                <div className="relative h-28 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
+                <div className="relative h-36 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
                   <Image 
                     src={parseImages(room.images)[0] || '/images/hero-bg.jpg'} 
                     alt={roomName}
@@ -53,10 +53,10 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                     loading={isFirstRoom ? "eager" : "lazy"}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center gap-2">
-                      <Badge className="bg-[#F7E9D7] text-[#402713] text-sm">{room.price} {t.rooms.perNight}</Badge>
-                      <Badge variant="secondary" className="bg-white/20 text-white border-0 text-sm">
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <div className="flex items-center gap-1">
+                      <Badge className="bg-[#F7E9D7] text-[#402713] text-xs">{room.price} {t.rooms.perNight}</Badge>
+                      <Badge variant="secondary" className="bg-white/20 text-white border-0 text-xs">
                         <Users className="w-3 h-3 mr-1" />
                         {t.rooms.upTo} {room.capacity} {t.rooms.guests}
                       </Badge>
@@ -68,11 +68,11 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 <div className="flex flex-col flex-1">
                   <CardHeader className="pb-1">
                     <CardTitle className="text-base md:text-xl">{roomName}</CardTitle>
-                    <CardDescription className="line-clamp-2 text-sm">{roomDescription}</CardDescription>
+                    <CardDescription className="line-clamp-1 text-sm">{roomDescription}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col justify-between">
                     <div className="flex flex-wrap gap-1">
-                      {parseLocalizedAmenities(room.amenities, lang).slice(0, 4).map((amenity: string, i: number) => (
+                      {parseLocalizedAmenities(room.amenities, lang).slice(0, 3).map((amenity: string, i: number) => (
                         <Badge key={i} variant="secondary" className="flex items-center gap-1 text-xs">
                           {getAmenityIcon(amenity)}
                           {amenity}
