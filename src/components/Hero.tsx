@@ -58,7 +58,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
           </div>
 
           {/* Right Side - Sliding Images */}
-          <div className="relative h-[150px] sm:h-[400px] md:h-[450px] lg:h-[500px] mt-auto">
+          <div className="relative h-[150px] sm:h-[400px] md:h-[450px] lg:h-[500px] mt-auto lg:mt-0">
             <div className="absolute inset-0 flex items-center justify-center">
               {allRoomImages.map((item, idx) => {
                 const roomData = rooms.find(r => r.id === item.roomId)
