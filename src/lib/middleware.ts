@@ -118,6 +118,13 @@ export const validateInput = {
       errors.push('Room capacity must be between 1 and 50 guests')
     }
 
+    if (data.bookingUrl !== undefined && data.bookingUrl !== '') {
+      const url = String(data.bookingUrl)
+      if (!/^https?:\/\/.+/.test(url) || url.length > 500) {
+        errors.push('Booking URL must be a valid http(s) URL')
+      }
+    }
+
     return { isValid: errors.length === 0, errors }
   },
 

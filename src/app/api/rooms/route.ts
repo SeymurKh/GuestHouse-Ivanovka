@@ -36,10 +36,10 @@ export async function GET() {
 export const POST = withAdminAuth(async (request: NextRequest) => {
   try {
     const body = await request.json()
-    const { name, description, conditions, advantages, price, capacity, amenities, images } = body
+    const { name, description, conditions, advantages, price, capacity, amenities, images, bookingUrl } = body
 
     // Validate input
-    const validation = validateInput.room({ name, description, price, capacity })
+    const validation = validateInput.room({ name, description, price, capacity, bookingUrl })
     if (!validation.isValid) {
       return NextResponse.json(
         { error: validation.errors[0] },
@@ -49,8 +49,8 @@ export const POST = withAdminAuth(async (request: NextRequest) => {
 
     const id = generateId()
     const stmt = db.prepare(`
-      INSERT INTO Room (id, name, description, conditions, advantages, price, capacity, amenities, images, isAvailable)
-      VALUES (@id, @name, @description, @conditions, @advantages, @price, @capacity, @amenities, @images, @isAvailable)
+      INSERT INTO Room (id, name, description, conditions, advantages, price, capacity, amenities, images, bookingUrl, isAvailable)
+      VALUES (@id, @name, @description, @conditions, @advantages, @price, @capacity, @amenities, @images, @bookingUrl, @isAvailable)
     `)
 
     stmt.run({
@@ -63,6 +63,7 @@ export const POST = withAdminAuth(async (request: NextRequest) => {
       capacity: parseInt(String(capacity), 10) || 2,
       amenities: stringifyJsonField(normalizeJsonField(amenities)),
       images: stringifyJsonField(normalizeJsonField(images)),
+      bookingUrl: sanitize.text(bookingUrl || ''),
       isAvailable: 1,
     })
 
@@ -78,7 +79,7 @@ export const POST = withAdminAuth(async (request: NextRequest) => {
 export const PUT = withAdminAuth(async (request: NextRequest) => {
   try {
     const body = await request.json()
-    const { id, name, description, conditions, advantages, price, capacity, amenities, images, isAvailable } = body
+    const { id, name, description, conditions, advantages, price, capacity, amenities, images, bookingUrl, isAvailable } = body
 
     if (!isValidId(id)) {
       return NextResponse.json({ error: 'ID домика не указан или некорректен' }, { status: 400 })
@@ -114,6 +115,13 @@ export const PUT = withAdminAuth(async (request: NextRequest) => {
     }
     if (amenities !== undefined) { setClauses.push('amenities = @amenities'); params.amenities = stringifyJsonField(normalizeJsonField(amenities)) }
     if (images !== undefined) { setClauses.push('images = @images'); params.images = stringifyJsonField(normalizeJsonField(images)) }
+    if (bookingUrl !== undefined) {
+      const url = String(bookingUrl)
+      if (url !== '' && (!/^https?:\/\/.+/.test(url) || url.length > 500)) {
+        return NextResponse.json({ error: 'Booking URL must be a valid http(s) URL' }, { status: 400 })
+      }
+      setClauses.push('bookingUrl = @bookingUrl'); params.bookingUrl = sanitize.text(url)
+    }
     if (isAvailable !== undefined) {
       if (typeof isAvailable !== 'boolean') {
         return NextResponse.json({ error: 'Поле isAvailable должно быть булевым' }, { status: 400 })

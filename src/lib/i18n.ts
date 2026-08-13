@@ -11,7 +11,7 @@ export const translations = {
   ru: {
     // Header
     nav: {
-      rooms: 'Домики',
+      rooms: 'Размещение',
       gallery: 'Галерея',
       contact: 'Контакты',
       call: 'Позвонить',
@@ -19,7 +19,7 @@ export const translations = {
     // Hero
     hero: {
       location: 'Азербайджан, Исмаиллы',
-      title1: 'Ivanovka',
+      title1: 'ROOM',
       title2: 'Guest Houses',
       subtitle: 'Уютные гостевые дома в сердце природы Исмаиллы.',
       description: 'Погрузитесь в атмосферу спокойствия, уюта и загородного отдыха. Здесь природа, приватность и комфорт соединяются в одном пространстве — идеально для семей, друзей и тихих уикендов вдали от города.',
@@ -32,8 +32,7 @@ export const translations = {
     // Rooms
     rooms: {
       badge: 'Размещение',
-      title: 'Наши домики',
-      description: 'Два уникальных домика для вашего идеального отдыха',
+      title: 'Дома с участком',
       perNight: 'AZN / ночь',
       upTo: 'до',
       guests: 'гостей',
@@ -52,7 +51,7 @@ export const translations = {
     // Gallery
     gallery: {
       badge: 'Галерея',
-      title: 'Окружающая природа',
+      title: 'Окрестности Ивановки',
       description: 'Горы, леса, водопады — всё это рядом с нами',
       forest: 'Лесные тропы',
       waterfall: 'Горный водопад',
@@ -65,11 +64,11 @@ export const translations = {
     contact: {
       badge: 'Контакты',
       title: 'Свяжитесь с нами',
-      description: 'Готовы ответить на все ваши вопросы и помочь с выбором домика',
+      description: 'Готовы ответить на все ваши вопросы и помочь с выбором',
       phone: 'Телефон',
       email: 'Email',
       address: 'Адрес',
-      addressValue: 'Азербайджан, Исмаиллы',
+      addressValue: 'Азербайджан, г. Исмаиллы, посёлок Ивановка',
     },
     // Footer
     footer: {
@@ -118,7 +117,7 @@ export const translations = {
   az: {
     // Header
     nav: {
-      rooms: 'Eviklər',
+      rooms: 'Yerləşmə',
       gallery: 'Qalereya',
       contact: 'Əlaqə',
       call: 'Zəng et',
@@ -126,7 +125,7 @@ export const translations = {
     // Hero
     hero: {
       location: 'Azərbaycan, İsmayıllı',
-      title1: 'Ivanovka',
+      title1: 'ROOM',
       title2: 'Guest Houses',
       subtitle: 'İsmayıllı təbiətinin ürəyində istirahət üçün qonaq evləri.',
       description: 'Sakitlik, rahatlıq və kənd həyatı atmosferinə dalın. Burada təbiət, məxfilik və rahatlıq bir məkanda birləşir — ailələr, dostlar və şəhərdən uzaq sakit həftəsonları üçün idealdır.',
@@ -139,8 +138,7 @@ export const translations = {
     // Rooms
     rooms: {
       badge: 'Qalmaq',
-      title: 'Eviklərimiz',
-      description: 'Mükəmməl istirahətiniz üçün iki unikal evik',
+      title: 'Həyətli evlər',
       perNight: 'AZN / gecə',
       upTo: 'ədək',
       guests: 'qonaq',
@@ -159,7 +157,7 @@ export const translations = {
     // Gallery
     gallery: {
       badge: 'Qalereya',
-      title: 'Ətraf təbiət',
+      title: 'İvanovka ətrafı',
       description: 'Dağlar, meşələr, şəlalələr — hamısı bizim yaxınlığımızda',
       forest: 'Meşə cığırları',
       waterfall: 'Dağ şəlaləsi',
@@ -172,11 +170,11 @@ export const translations = {
     contact: {
       badge: 'Əlaqə',
       title: 'Bizimlə əlaqə saxlayın',
-      description: 'Bütün suallarınıza cavab verməyə və evik seçməyə kömək etməyə hazırdıq',
+      description: 'Bütün suallarınıza cavab verməyə və seçimdə kömək etməyə hazırdıq',
       phone: 'Telefon',
       email: 'Email',
       address: 'Ünvan',
-      addressValue: 'Azərbaycan, İsmayıllı',
+      addressValue: 'Azərbaycan, İsmayıllı şəhəri, İvanovka qəsəbəsi',
     },
     // Footer
     footer: {
@@ -225,7 +223,7 @@ export const translations = {
   en: {
     // Header
     nav: {
-      rooms: 'Cottages',
+      rooms: 'Accommodation',
       gallery: 'Gallery',
       contact: 'Contact',
       call: 'Call',
@@ -233,7 +231,7 @@ export const translations = {
     // Hero
     hero: {
       location: 'Azerbaijan, Ismayilli',
-      title1: 'Ivanovka',
+      title1: 'ROOM',
       title2: 'Guest Houses',
       subtitle: 'Cozy guest houses in the heart of Ismayilli nature.',
       description: 'Immerse yourself in tranquility, comfort and countryside living. Here nature, privacy and comfort come together in one space — perfect for families, friends and quiet weekends away from the city.',
@@ -246,8 +244,7 @@ export const translations = {
     // Rooms
     rooms: {
       badge: 'Accommodation',
-      title: 'Our Cottages',
-      description: 'Two unique cottages for your perfect getaway',
+      title: 'Houses with Grounds',
       perNight: 'AZN / night',
       upTo: 'up to',
       guests: 'guests',
@@ -266,7 +263,7 @@ export const translations = {
     // Gallery
     gallery: {
       badge: 'Gallery',
-      title: 'Surrounding Nature',
+      title: 'Around Ivanovka',
       description: 'Mountains, forests, waterfalls — all nearby',
       forest: 'Forest Trails',
       waterfall: 'Mountain Waterfall',
@@ -279,11 +276,11 @@ export const translations = {
     contact: {
       badge: 'Contact',
       title: 'Get in Touch',
-      description: 'Ready to answer all your questions and help you choose a cottage',
+      description: 'Ready to answer all your questions and help you choose',
       phone: 'Phone',
       email: 'Email',
       address: 'Address',
-      addressValue: 'Azerbaijan, Ismayilli',
+      addressValue: 'Azerbaijan, Ismayilli city, Ivanovka settlement',
     },
     // Footer
     footer: {

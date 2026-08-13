@@ -18,9 +18,9 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <Image src="/vacationhomelogo.png" alt="Logo" width={32} height={32} className="w-8 h-8 rounded" />
-          <span className="font-bold text-sm sm:text-lg md:text-xl text-[#b8ad9a]">Ivanovka Guest Houses</span>
+        <a href="#" className="flex items-center gap-2 sm:gap-3">
+          <Image src="/vacationhomelogo.png" alt="ROOM Guest Houses" width={1107} height={950} className="h-10 sm:h-12 w-auto rounded" priority />
+          <span className="font-bold text-sm sm:text-lg md:text-xl text-[#b8ad9a]">ROOM Guest Houses</span>
         </a>
         
         <nav className="hidden md:flex items-center gap-6">

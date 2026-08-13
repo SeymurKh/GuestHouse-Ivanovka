@@ -4,11 +4,11 @@ import { Mountain } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="relative z-10 bg-black/60 backdrop-blur-md py-4 text-white">
+    <footer className="relative z-10 bg-gradient-to-b from-[#261A0B] via-black/40 to-black/60 backdrop-blur-md py-4 text-white">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center gap-2">
           <Mountain className="w-5 h-5 text-primary" />
-          <span className="font-semibold">Ivanovka Guest Houses</span>
+          <span className="font-semibold">ROOM Guest Houses © 2026</span>
         </div>
       </div>
     </footer>

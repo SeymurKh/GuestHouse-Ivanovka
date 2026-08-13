@@ -20,13 +20,12 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
   
   return (
     <section id="rooms" className="relative z-10 min-h-screen flex items-center py-16 bg-black/30 backdrop-blur-sm">
+      {/* Smooth transition from hero */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-transparent to-black/30 pointer-events-none" />
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <Badge className="mb-4">{t.rooms.badge}</Badge>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.rooms.title}</h2>
-          <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base">
-            {t.rooms.description}
-          </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">

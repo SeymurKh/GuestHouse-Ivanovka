@@ -32,6 +32,7 @@ export function createDb(): Database.Database {
       capacity INTEGER NOT NULL,
       amenities TEXT NOT NULL DEFAULT '[]',
       images TEXT NOT NULL DEFAULT '[]',
+      bookingUrl TEXT NOT NULL DEFAULT '',
       isAvailable INTEGER NOT NULL DEFAULT 1,
       createdAt TEXT NOT NULL DEFAULT (datetime('now')),
       updatedAt TEXT NOT NULL DEFAULT (datetime('now'))
@@ -54,6 +55,13 @@ export function createDb(): Database.Database {
       description TEXT
     );
   `)
+
+  // Migration for existing databases: add bookingUrl if missing
+  try {
+    db.exec("ALTER TABLE Room ADD COLUMN bookingUrl TEXT NOT NULL DEFAULT ''")
+  } catch {
+    // Column already exists — nothing to do
+  }
 
   return db
 }
@@ -89,6 +97,7 @@ export function mapRoomRow(row: Record<string, unknown>) {
     capacity: row.capacity as number,
     amenities: parseJsonField(row.amenities),
     images: parseJsonField(row.images) as string[],
+    bookingUrl: (row.bookingUrl as string) || '',
     isAvailable: Boolean(row.isAvailable),
     createdAt: row.createdAt as string,
     updatedAt: row.updatedAt as string,

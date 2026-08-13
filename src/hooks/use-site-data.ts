@@ -8,7 +8,8 @@ import { demoRooms, demoReviews, demoSettings } from '@/lib/demo-data'
 export function useSiteData() {
   const [rooms, setRooms] = useState<Room[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
-  const [phone, setPhone] = useState('+994 50 123 45 67')
+  const [phone, setPhone] = useState('+994508080069')
+  const [email, setEmail] = useState('roomcommunityofficial@gmail.com')
   const [loading, setLoading] = useState(true)
 
   // Collect ALL images from all rooms with room info
@@ -34,6 +35,7 @@ export function useSiteData() {
         setRooms(demoRooms)
         setReviews(demoReviews)
         if (demoSettings.phone) setPhone(demoSettings.phone)
+        if (demoSettings.email) setEmail(demoSettings.email)
         setLoading(false)
         return
       }
@@ -58,6 +60,7 @@ export function useSiteData() {
         if (settingsRes.ok) {
           const settingsData = await settingsRes.json()
           if (settingsData?.phone) setPhone(settingsData.phone)
+          if (settingsData?.email) setEmail(settingsData.email)
         }
       } catch (error) {
         console.error('[Load Data Error]', error)
@@ -86,6 +89,7 @@ export function useSiteData() {
     reviews,
     setReviews,
     phone,
+    email,
     loading,
     allRoomImages,
     refreshReviews,

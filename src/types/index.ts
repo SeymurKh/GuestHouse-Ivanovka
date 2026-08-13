@@ -14,6 +14,7 @@ export interface Room {
   capacity: number
   amenities: JsonArrayOrObject
   images: string[]
+  bookingUrl: string
   isAvailable: boolean
 }
 

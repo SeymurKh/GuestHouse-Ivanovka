@@ -9,15 +9,15 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Ivanovka Guest Houses | Отдых в горах Азербайджана",
+  title: "ROOM Guest Houses | Отдых в горах Азербайджана",
   description: "Уютные гостевые дома в Исмаиллы. Отдых в окружении величественных гор и густых лесов. Бронирование домов, семейный отдых, романтические getaway.",
   keywords: ["Исмаиллы", "Азербайджан", "гостевые дома", "отдых в горах", "бронирование", "туризм", "природа"],
-  authors: [{ name: "Ivanovka Guest Houses" }],
+  authors: [{ name: "ROOM Guest Houses" }],
   icons: {
     icon: "/vacationhomelogo.png",
   },
   openGraph: {
-    title: "Ivanovka Guest Houses | Отдых в горах Азербайджана",
+    title: "ROOM Guest Houses | Отдых в горах Азербайджана",
     description: "Уютные гостевые дома в Исмаиллы. Отдых в окружении величественных гор и густых лесов.",
     type: "website",
   },

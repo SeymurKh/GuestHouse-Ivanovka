@@ -40,6 +40,7 @@ const demoRooms = rooms.map((row) => ({
   capacity: row.capacity,
   amenities: parseJson(row.amenities, []),
   images: parseJson(row.images, []),
+  bookingUrl: row.bookingUrl || '',
   isAvailable: Boolean(row.isAvailable),
 }))
 
@@ -59,9 +60,9 @@ const demoSettings = settings
       description: settings.description || '',
     }
   : {
-      phone: '+994 50 123 45 67',
-      email: 'info@guesthouse-ivanovka.az',
-      address: 'Азербайджан, Исмаиллы',
+      phone: '+994508080069',
+      email: 'roomcommunityofficial@gmail.com',
+      address: 'Азербайджан, г. Исмаиллы, посёлок Ивановка',
       description: 'Уютные гостевые дома в горах Азербайджана. Отдых в окружении величественных гор и густых лесов.',
     }
 

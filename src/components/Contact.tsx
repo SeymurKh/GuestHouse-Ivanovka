@@ -10,16 +10,19 @@ import { useLanguage } from '@/lib/LanguageContext'
 
 interface ContactProps {
   phone: string
+  email: string
   reviews: Review[]
   currentReview: number
   setCurrentReview: (index: number) => void
 }
 
-export function Contact({ phone, reviews, currentReview, setCurrentReview }: ContactProps) {
+export function Contact({ phone, email, reviews, currentReview, setCurrentReview }: ContactProps) {
   const { t } = useLanguage()
 
   return (
     <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 bg-[#261A0B] text-white">
+      {/* Smooth transition from gallery section */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
 
@@ -41,24 +44,29 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
                   <p className="font-medium text-[#b8ad9a]">{phone}</p>
                 </div>
               </a>
-              <a href="mailto:info@guesthouse-ivanovka.az" className="flex items-center gap-3 group">
+              <a href={`mailto:${email}`} className="flex items-center gap-3 group">
                 <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60">{t.contact.email}</p>
-                  <p className="font-medium text-[#b8ad9a]">info@guesthouse-ivanovka.az</p>
+                  <p className="font-medium text-[#b8ad9a]">{email}</p>
                 </div>
               </a>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Ivanovka,+Ismayilli,+Azerbaijan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60">{t.contact.address}</p>
-                  <p className="font-medium text-[#b8ad9a]">{t.contact.addressValue}</p>
+                  <p className="font-medium text-[#b8ad9a] group-hover:underline">{t.contact.addressValue}</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -113,6 +121,18 @@ export function Contact({ phone, reviews, currentReview, setCurrentReview }: Con
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Embedded Google Map */}
+        <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+          <iframe
+            src="https://maps.google.com/maps?q=Ivanovka,+Ismayilli,+Azerbaijan&z=12&output=embed"
+            className="w-full h-64 md:h-80 block"
+            loading="lazy"
+            title={t.contact.addressValue}
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
       </div>
     </section>

@@ -37,6 +37,7 @@ export default function GuestHouseLanding() {
     setRooms,
     reviews,
     phone,
+    email,
     loading,
     allRoomImages,
     refreshReviews,
@@ -206,6 +207,7 @@ export default function GuestHouseLanding() {
       {/* Contact Section */}
       <Contact
         phone={phone}
+        email={email}
         reviews={reviews}
         currentReview={currentReview}
         setCurrentReview={setCurrentReview}

@@ -15,8 +15,8 @@ export const POST = withAdminAuth(async () => {
     }
 
     const insertRoom = db.prepare(`
-      INSERT INTO Room (id, name, description, conditions, advantages, price, capacity, amenities, images, isAvailable)
-      VALUES (@id, @name, @description, @conditions, @advantages, @price, @capacity, @amenities, @images, @isAvailable)
+      INSERT INTO Room (id, name, description, conditions, advantages, price, capacity, amenities, images, bookingUrl, isAvailable)
+      VALUES (@id, @name, @description, @conditions, @advantages, @price, @capacity, @amenities, @images, @bookingUrl, @isAvailable)
     `)
 
     for (const room of demoRooms) {
@@ -31,6 +31,7 @@ export const POST = withAdminAuth(async () => {
         capacity: room.capacity,
         amenities: stringifyJsonField(room.amenities),
         images: stringifyJsonField(room.images),
+        bookingUrl: room.bookingUrl ?? '',
         isAvailable: room.isAvailable ? 1 : 0,
       })
     }

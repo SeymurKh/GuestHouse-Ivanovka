@@ -51,6 +51,7 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
   const [editPrice, setEditPrice] = useState(0)
   const [editCapacity, setEditCapacity] = useState(2)
   const [editImages, setEditImages] = useState<string[]>([])
+  const [editBookingUrl, setEditBookingUrl] = useState('')
 
   // Current language tab
   const [editLang, setEditLang] = useState<Language>('ru')
@@ -77,6 +78,7 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
     setEditAdvantages(parseLocalizedStringToForm(room.advantages))
     setEditAmenities(parseLocalizedStringToForm(room.amenities))
     setEditImages(parseImages(room.images))
+    setEditBookingUrl(room.bookingUrl || '')
     setEditLang('ru')
   }
 
@@ -90,6 +92,7 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
     setEditAdvantages({ ru: '', az: '', en: '' })
     setEditAmenities({ ru: '', az: '', en: '' })
     setEditImages([])
+    setEditBookingUrl('')
     setEditLang('ru')
   }
 
@@ -103,6 +106,7 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
     setEditAdvantages({ ru: '', az: '', en: '' })
     setEditAmenities({ ru: '', az: '', en: '' })
     setEditImages([])
+    setEditBookingUrl('')
   }
 
   // Build room data payload from form state
@@ -128,6 +132,7 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
       advantages: advantagesArr,
       amenities: amenitiesArr,
       images: editImages,
+      bookingUrl: editBookingUrl,
     }
   }
 
@@ -268,6 +273,18 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
       <div>
         <Label htmlFor="edit-capacity">Вместимость (гостей)</Label>
         <Input id="edit-capacity" type="number" value={editCapacity} onChange={(e) => setEditCapacity(parseInt(e.target.value) || 1)} />
+      </div>
+
+      {/* Booking.com URL */}
+      <div>
+        <Label htmlFor="edit-booking-url">Booking.com URL</Label>
+        <Input
+          id="edit-booking-url"
+          type="url"
+          value={editBookingUrl}
+          onChange={(e) => setEditBookingUrl(e.target.value)}
+          placeholder="https://www.booking.com/hotel/az/..."
+        />
       </div>
 
       {/* Description */}

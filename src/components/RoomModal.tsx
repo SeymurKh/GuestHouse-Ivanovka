@@ -60,18 +60,31 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
           </div>
         </DialogHeader>
   
-        {/* Book Button - separate block between header and content */}
-        <div className="flex justify-center sm:justify-end pb-2 sm:pb-3 border-b">
+        {/* Book Buttons - symmetric row: WhatsApp + Booking.com */}
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button
             asChild
             size="sm"
-            className="w-full sm:w-auto gap-1.5 sm:gap-2 bg-[#402713] hover:bg-[#5a3a1f] text-white text-xs sm:text-sm"
+            className="flex-1 gap-1.5 sm:gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm"
           >
             <a href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
               <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               {t.modal.book}
             </a>
           </Button>
+          {room.bookingUrl && (
+            <Button
+              asChild
+              size="sm"
+              className="flex-1 gap-1.5 sm:gap-2 bg-[#003580] hover:bg-[#002a66] text-white text-xs sm:text-sm"
+            >
+              <a href={room.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/booking-logo.svg" alt="Booking.com" className="w-4 h-4 sm:w-5 sm:h-5 rounded" />
+                Booking.com
+              </a>
+            </Button>
+          )}
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 py-2 sm:py-4">
