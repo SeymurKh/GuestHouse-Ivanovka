@@ -47,6 +47,7 @@ export function ReviewManager({ open, isAdmin, authHeaders, onReviewsUpdate }: R
   // Load reviews when tab becomes visible
   useEffect(() => {
     if (open && isAdmin) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       void fetchReviews()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

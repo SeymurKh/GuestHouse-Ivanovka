@@ -9,8 +9,8 @@ module.exports = {
     },
     // Auto-restart on crash
     autorestart: true,
-    // Max memory before restart (200MB)
-    max_memory_restart: '200M',
+    // Max memory before restart (500MB — Next.js 16 idles at ~250-400MB)
+    max_memory_restart: '500M',
     // Number of instances (1 for SQLite — single process)
     instances: 1,
     // No clustering — SQLite doesn't support concurrent writes

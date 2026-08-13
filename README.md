@@ -1,6 +1,6 @@
 # Guest House Ivanovka
 
-Уютный гостевой дом в горах Азербайджана, Исмаиллы. Информационный сайт с обратной связью через WhatsApp и административной панелью.
+Уютные гостевые дома в горах Азербайджана, Исмаиллы. Информационный сайт с обратной связью через WhatsApp и административной панелью.
 
 ## 🏠 Особенности
 
@@ -9,20 +9,21 @@
 - 💬 Связь через WhatsApp
 - 🔐 Административная панель для управления контентом
 - 🏡 Управление домиками и отзывами
+- 🖼 Загрузка фотографий через админку
 
 ## 🛠 Технологии
 
-- **Next.js 16** - React фреймворк
-- **TypeScript** - типизация
-- **Tailwind CSS 4** - стилизация
-- **Prisma** - ORM для базы данных (SQLite)
-- **shadcn/ui** - UI компоненты
-- **Framer Motion** - анимации
+- **Next.js 16** — React фреймворк (App Router)
+- **TypeScript** — типизация
+- **Tailwind CSS 4** — стилизация
+- **SQLite (better-sqlite3)** — база данных, файл `data/guesthouse.db`
+- **shadcn/ui** — UI компоненты
+- **Vitest** — тесты
 
 ## 📋 Требования
 
-- Node.js 18+ 
-- npm или yarn
+- Node.js 18+
+- npm
 
 ## 🚀 Установка и запуск
 
@@ -50,18 +51,12 @@ cp .env.example .env     # Linux/Mac
 ```
 
 Отредактируйте `.env` и установите свой пароль администратора:
+
 ```
 ADMIN_PASSWORD="ваш-надежный-пароль"
 ```
 
-### 4. Инициализация базы данных
-
-```bash
-npx prisma migrate dev
-npx prisma db seed
-```
-
-### 5. Запуск в режиме разработки
+### 4. Запуск в режиме разработки
 
 ```bash
 npm run dev
@@ -69,47 +64,76 @@ npm run dev
 
 Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
+База данных SQLite создаётся автоматически при первом запуске (`data/guesthouse.db`). Для наполнения пустой БД начальными данными выполните POST-запрос на `/api/init` с админ-токеном (данные берутся из `src/lib/demo-data.ts`).
+
 ## 🔐 Административная панель
 
 1. Нажмите **Ctrl+Shift+A** на клавиатуре
-2. Введите пароль администратора (по умолчанию: `admin123`)
+2. Введите пароль администратора
 3. Управляйте домиками и отзывами
 
 ### Возможности админ-панели:
+
 - Редактирование информации о домиках (на 3 языках)
 - Загрузка и удаление фотографий
 - Управление отзывами (добавление, редактирование, удаление)
 
-## 🏗 Сборка для продакшена
+## 🌍 Демо-режим (Vercel)
+
+Сайт может работать без базы данных в демо-режиме (статичные данные из `src/lib/demo-data.ts`). Для этого установите переменную окружения:
+
+```
+NEXT_PUBLIC_DEMO_MODE="true"
+```
+
+### Синхронизация демо-данных с реальной БД
+
+`src/lib/demo-data.ts` — **автогенерируемый файл, не редактировать вручную!**
+
+После правок контента через админку (локально, с БД) обновите демо-данные:
+
+```bash
+npm run export-demo
+git add src/lib/demo-data.ts && git commit -m "Update demo data"
+```
+
+## 🏗 Продакшен (Hetzner VPS + PM2)
 
 ```bash
 npm run build
-npm start
+pm2 start ecosystem.config.js
 ```
 
-## 🐳 Docker
+Деплой обновлений на сервере: `./deploy.sh` (git pull → npm ci → build → pm2 restart).
+
+### Миграция контента на сервер
+
+Контент — это файл SQLite и загруженные фото. Копируется напрямую:
 
 ```bash
-docker build -t guesthouse-ivanovka .
-docker run -p 3000:3000 -e ADMIN_PASSWORD="your-password" guesthouse-ivanovka
+scp data/guesthouse.db user@server:/path/to/project/data/
+scp -r public/uploads/ user@server:/path/to/project/public/
 ```
 
 ## 📁 Структура проекта
 
 ```
-├── prisma/           # Схема базы данных и миграции
 ├── public/           # Статические файлы
 │   ├── flags/        # Флаги языков
-│   ├── images/       # Изображения
-│   └── uploads/      # Загруженные фото
+│   ├── images/       # Изображения (галерея, фон)
+│   └── uploads/      # Загруженные фото домиков
+├── scripts/
+│   └── export-demo.mjs  # Экспорт БД → demo-data.ts
 ├── src/
 │   ├── app/          # Next.js App Router
-│   │   └── api/      # API эндпоинты
-│   ├── components/   # React компоненты
+│   │   └── api/      # API эндпоинты (rooms, reviews, settings, upload, admin, init)
+│   ├── components/   # React компоненты (+ admin/, ui/)
 │   ├── hooks/        # React хуки
-│   └── lib/          # Утилиты и конфигурация
+│   ├── lib/          # Утилиты, БД, i18n
+│   └── __tests__/    # Тесты Vitest
+├── data/             # SQLite база (создаётся автоматически, в .gitignore)
 ├── .env.example      # Пример конфигурации
-└── README.md         # Документация
+└── ecosystem.config.js  # Конфигурация PM2
 ```
 
 ## 🔧 Доступные скрипты
@@ -121,7 +145,7 @@ docker run -p 3000:3000 -e ADMIN_PASSWORD="your-password" guesthouse-ivanovka
 | `npm start` | Запуск продакшен сборки |
 | `npm run lint` | Проверка ESLint |
 | `npm test` | Запуск тестов |
-| `npx prisma studio` | GUI для базы данных |
+| `npm run export-demo` | Экспорт БД в demo-data.ts для Vercel |
 
 ## 📝 Лицензия
 

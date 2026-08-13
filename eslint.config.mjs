@@ -25,7 +25,8 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     
     // General JavaScript rules
     "prefer-const": "off",
-    "no-unused-vars": "warn",
+    // Base rule disabled: it misfires on TS interfaces/types — @typescript-eslint/no-unused-vars (warn) covers it
+    "no-unused-vars": "off",
     "no-console": "off",
     "no-debugger": "warn",
     "no-empty": "off",
