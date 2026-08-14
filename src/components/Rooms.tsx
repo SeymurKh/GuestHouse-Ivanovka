@@ -19,9 +19,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
   const { t, lang } = useLanguage()
   
   return (
-    <section id="rooms" className="relative z-10 min-h-screen flex items-center py-16 bg-black/30 backdrop-blur-sm">
-      {/* Smooth transition from hero */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-transparent to-black/30 pointer-events-none" />
+    <section id="rooms" className="relative z-10 min-h-screen flex items-center py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <Badge className="mb-4">{t.rooms.badge}</Badge>

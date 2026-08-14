@@ -48,6 +48,11 @@ export const translations = {
       book: 'Забронировать',
       bookPhone: 'Забронировать по телефону',
     },
+    // Booking picker dialog
+    booking: {
+      title: 'Бронирование на Booking.com',
+      subtitle: 'Выберите дом',
+    },
     // Gallery
     gallery: {
       badge: 'Галерея',
@@ -154,6 +159,11 @@ export const translations = {
       book: 'Rezervasiya',
       bookPhone: 'Telefonla rezervasiya',
     },
+    // Booking picker dialog
+    booking: {
+      title: 'Booking.com-da rezervasiya',
+      subtitle: 'Evi seçin',
+    },
     // Gallery
     gallery: {
       badge: 'Qalereya',
@@ -259,6 +269,11 @@ export const translations = {
       images: 'Images',
       book: 'Book Now',
       bookPhone: 'Book by phone',
+    },
+    // Booking picker dialog
+    booking: {
+      title: 'Book on Booking.com',
+      subtitle: 'Choose a house',
     },
     // Gallery
     gallery: {

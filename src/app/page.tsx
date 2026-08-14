@@ -175,12 +175,13 @@ export default function GuestHouseLanding() {
           backgroundPosition: 'center',
         }}
       />
-      {/* Dark overlay for text readability */}
-      <div className="fixed inset-0 z-0 bg-black/40" />
+      {/* Continuous page-wide gradient overlay — no seams between sections */}
+      <div aria-hidden className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/45 to-[#261A0B] pointer-events-none" />
 
       {/* Header */}
       <Header
         phone={phone}
+        rooms={rooms}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />

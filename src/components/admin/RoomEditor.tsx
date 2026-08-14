@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Label } from '@/components/ui/label'
 import { Loader2, Globe, Plus, Trash2 } from 'lucide-react'
 import { Room } from '@/types'
-import { parseImages } from '@/lib/parse'
+import { parseImages, parseLocalizedAmenities } from '@/lib/parse'
 import { parseLocalizedStringToForm, createLocalizedString, getLocalizedValue } from '@/lib/localize'
 import { languages, Language } from '@/lib/i18n'
 import { useToast } from '@/hooks/use-toast'
@@ -24,6 +24,20 @@ interface LocalizedField {
 
 // Marker for "creating new room" mode
 const CREATING_ID = 'new'
+
+// Parse localized list field into comma-joined form values.
+// Repairs legacy values where items were glued together with newlines.
+const parseListToForm = (value: unknown): LocalizedField => {
+  const result: LocalizedField = { ru: '', az: '', en: '' }
+  for (const lang of ['ru', 'az', 'en'] as Language[]) {
+    result[lang] = parseLocalizedAmenities(value, lang)
+      .flatMap((item) => item.split('\n'))
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .join(', ')
+  }
+  return result
+}
 
 interface RoomEditorProps {
   rooms: Room[]
@@ -47,9 +61,9 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
   const [editAdvantages, setEditAdvantages] = useState<LocalizedField>({ ru: '', az: '', en: '' })
   const [editAmenities, setEditAmenities] = useState<LocalizedField>({ ru: '', az: '', en: '' })
 
-  // Non-localized fields
-  const [editPrice, setEditPrice] = useState(0)
-  const [editCapacity, setEditCapacity] = useState(2)
+  // Non-localized fields (raw strings — parsed on save, so typing isn't interrupted)
+  const [editPrice, setEditPrice] = useState('')
+  const [editCapacity, setEditCapacity] = useState('2')
   const [editImages, setEditImages] = useState<string[]>([])
   const [editBookingUrl, setEditBookingUrl] = useState('')
 
@@ -71,12 +85,12 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
   const startEditingRoom = (room: Room) => {
     setEditId(room.id)
     setEditName(parseLocalizedStringToForm(room.name))
-    setEditPrice(room.price)
-    setEditCapacity(room.capacity)
+    setEditPrice(String(room.price))
+    setEditCapacity(String(room.capacity))
     setEditDescription(parseLocalizedStringToForm(room.description))
     setEditConditions(parseLocalizedStringToForm(room.conditions))
     setEditAdvantages(parseLocalizedStringToForm(room.advantages))
-    setEditAmenities(parseLocalizedStringToForm(room.amenities))
+    setEditAmenities(parseListToForm(room.amenities))
     setEditImages(parseImages(room.images))
     setEditBookingUrl(room.bookingUrl || '')
     setEditLang('ru')
@@ -85,8 +99,8 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
   const startCreatingRoom = () => {
     setEditId(CREATING_ID)
     setEditName({ ru: '', az: '', en: '' })
-    setEditPrice(0)
-    setEditCapacity(2)
+    setEditPrice('')
+    setEditCapacity('2')
     setEditDescription({ ru: '', az: '', en: '' })
     setEditConditions({ ru: '', az: '', en: '' })
     setEditAdvantages({ ru: '', az: '', en: '' })
@@ -99,8 +113,8 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
   const cancelEditing = () => {
     setEditId(null)
     setEditName({ ru: '', az: '', en: '' })
-    setEditPrice(0)
-    setEditCapacity(2)
+    setEditPrice('')
+    setEditCapacity('2')
     setEditDescription({ ru: '', az: '', en: '' })
     setEditConditions({ ru: '', az: '', en: '' })
     setEditAdvantages({ ru: '', az: '', en: '' })
@@ -118,15 +132,15 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
     }
 
     const amenitiesArr = {
-      ru: editAmenities.ru.split(',').map(s => s.trim()).filter(Boolean),
-      az: editAmenities.az.split(',').map(s => s.trim()).filter(Boolean),
-      en: editAmenities.en.split(',').map(s => s.trim()).filter(Boolean),
+      ru: editAmenities.ru.split(/[,\n]/).map(s => s.trim()).filter(Boolean),
+      az: editAmenities.az.split(/[,\n]/).map(s => s.trim()).filter(Boolean),
+      en: editAmenities.en.split(/[,\n]/).map(s => s.trim()).filter(Boolean),
     }
 
     return {
       name: createLocalizedString(editName.ru, editName.az, editName.en),
-      price: editPrice,
-      capacity: editCapacity,
+      price: parseFloat(editPrice) || 0,
+      capacity: parseInt(editCapacity, 10) || 1,
       description: createLocalizedString(editDescription.ru, editDescription.az, editDescription.en),
       conditions: createLocalizedString(editConditions.ru, editConditions.az, editConditions.en),
       advantages: advantagesArr,
@@ -265,14 +279,14 @@ export function RoomEditor({ rooms, authHeaders, onRoomUpdate, onRoomCreate, onR
         </div>
         <div>
           <Label htmlFor="edit-price">Цена (AZN)</Label>
-          <Input id="edit-price" type="number" value={editPrice} onChange={(e) => setEditPrice(parseFloat(e.target.value) || 0)} />
+          <Input id="edit-price" type="number" value={editPrice} onChange={(e) => setEditPrice(e.target.value)} />
         </div>
       </div>
 
       {/* Capacity */}
       <div>
         <Label htmlFor="edit-capacity">Вместимость (гостей)</Label>
-        <Input id="edit-capacity" type="number" value={editCapacity} onChange={(e) => setEditCapacity(parseInt(e.target.value) || 1)} />
+        <Input id="edit-capacity" type="number" value={editCapacity} onChange={(e) => setEditCapacity(e.target.value)} />
       </div>
 
       {/* Booking.com URL */}

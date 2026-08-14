@@ -49,12 +49,12 @@ export function useSiteData() {
 
         if (roomsRes.ok) {
           const roomsData = await roomsRes.json()
-          setRooms(roomsData)
+          if (Array.isArray(roomsData)) setRooms(roomsData)
         }
 
         if (reviewsRes.ok) {
           const reviewsData = await reviewsRes.json()
-          setReviews(reviewsData.slice(0, 5))
+          if (Array.isArray(reviewsData)) setReviews(reviewsData.slice(0, 5))
         }
 
         if (settingsRes.ok) {
@@ -76,7 +76,7 @@ export function useSiteData() {
       const res = await fetch('/api/reviews')
       if (res.ok) {
         const data = await res.json()
-        setReviews(data.slice(0, 5))
+        if (Array.isArray(data)) setReviews(data.slice(0, 5))
       }
     } catch {
       // Failed to refresh reviews

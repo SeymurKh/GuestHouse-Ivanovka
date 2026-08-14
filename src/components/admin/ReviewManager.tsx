@@ -36,7 +36,13 @@ export function ReviewManager({ open, isAdmin, authHeaders, onReviewsUpdate }: R
         headers: authHeaders,
       })
       const data = await res.json()
-      setReviews(data.slice(0, 5)) // Max 5 reviews
+      if (res.status === 401) {
+        toast({ title: 'Сессия истекла', description: 'Войдите в админ-панель заново', variant: 'destructive' })
+        return
+      }
+      if (Array.isArray(data)) {
+        setReviews(data.slice(0, 5)) // Max 5 reviews
+      }
     } catch {
       // Failed to fetch reviews
     } finally {

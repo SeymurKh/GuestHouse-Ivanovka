@@ -20,9 +20,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
   const { t } = useLanguage()
 
   return (
-    <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 bg-[#261A0B] text-white">
-      {/* Smooth transition from gallery section */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
+    <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 text-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
 

@@ -6,13 +6,16 @@ import { Menu, X } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { useLanguage } from '@/lib/LanguageContext'
 import { languages } from '@/lib/i18n'
+import { Room } from '@/types'
+import { BookingButton } from '@/components/BookingButton'
 
 interface HeaderProps {
   phone: string
+  rooms: Room[]
   mobileMenuOpen: boolean
   setMobileMenuOpen: (open: boolean) => void
 }
-export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
+export function Header({ phone, rooms, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
   const { lang, setLang, t } = useLanguage()
 
   return (
@@ -60,6 +63,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
               {t.hero.btnBook}
             </a>
           </Button>
+          <BookingButton rooms={rooms} size="default" className="hidden sm:flex gap-2 bg-[#003580] hover:bg-[#002a66] text-white" />
           <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/10" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
@@ -78,6 +82,7 @@ export function Header({ phone, mobileMenuOpen, setMobileMenuOpen }: HeaderProps
                 {t.hero.btnBook}
               </a>
             </Button>
+            <BookingButton rooms={rooms} className="gap-2 bg-[#003580] hover:bg-[#002a66] text-white w-full" />
           </nav>
         </div>
       )}

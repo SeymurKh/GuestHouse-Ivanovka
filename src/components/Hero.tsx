@@ -8,6 +8,7 @@ import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { RoomImage, Room } from '@/types'
 import { useLanguage } from '@/lib/LanguageContext'
 import { getLocalizedValue } from '@/lib/localize'
+import { BookingButton } from '@/components/BookingButton'
 
 interface HeroProps {
   phone: string
@@ -20,11 +21,6 @@ interface HeroProps {
 
 export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, rooms }: HeroProps) {
   const { t, lang } = useLanguage()
-
-  // Booking link of the room shown in the current slide
-  const currentBookingUrl = rooms.find(
-    (r) => r.id === allRoomImages[currentSlide]?.roomId
-  )?.bookingUrl
 
   return (
     <section className="relative z-10 min-h-screen flex items-start lg:items-center pt-20 pb-8">
@@ -59,15 +55,7 @@ export function Hero({ phone, allRoomImages, currentSlide, setCurrentSlide, room
                   {t.hero.btnBook}
                 </a>
               </Button>
-              {currentBookingUrl && (
-                <Button asChild size="lg" className="gap-2 bg-[#003580] hover:bg-[#002a66] text-white px-8">
-                  <a href={currentBookingUrl} target="_blank" rel="noopener noreferrer">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/booking-logo.svg" alt="Booking.com" className="w-5 h-5 rounded" />
-                    Booking.com
-                  </a>
-                </Button>
-              )}
+              <BookingButton rooms={rooms} size="lg" className="gap-2 bg-[#003580] hover:bg-[#002a66] text-white px-8" />
             </div>
           </div>
 
