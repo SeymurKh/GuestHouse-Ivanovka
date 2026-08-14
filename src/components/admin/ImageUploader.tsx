@@ -82,7 +82,8 @@ export function ImageUploader({ images, onImagesChange, authHeaders, disabled }:
   }
 
   const deleteFile = async (imageUrl: string): Promise<boolean> => {
-    if (!imageUrl.startsWith('/uploads/')) {
+    // Only server-uploaded files can be deleted (not bundled /images/... assets)
+    if (!imageUrl.startsWith('/uploads/') && !imageUrl.startsWith('/api/files/')) {
       return true
     }
 

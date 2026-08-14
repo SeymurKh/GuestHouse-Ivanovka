@@ -5,7 +5,7 @@
 // content/ — локальная папка-источник (в .gitignore), в репо уходят только копии в public/
 
 import Database from 'better-sqlite3'
-import { copyFileSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -26,6 +26,11 @@ const manifest = {}
 for (const job of jobs) {
   const srcDir = path.join(root, job.src)
   const destDir = path.join(root, job.dest)
+
+  if (!existsSync(srcDir)) {
+    console.warn(`⚠️  ${job.src}: папка не найдена, пропуск`)
+    continue
+  }
 
   const files = readdirSync(srcDir)
     .filter((f) => IMAGE_EXT.has(path.extname(f).toLowerCase()))

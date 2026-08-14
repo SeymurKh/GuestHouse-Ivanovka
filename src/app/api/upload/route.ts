@@ -84,7 +84,9 @@ export const POST = withAdminAuth(async (request: NextRequest) => {
     const filepath = path.join(uploadDir, filename)
     await writeFile(filepath, buffer)
     
-    const publicUrl = `/uploads/${filename}`
+    // Serve via /api/files/ — Next.js only serves public/ files present at build/startup time,
+    // so runtime uploads would 404 if referenced as /uploads/...
+    const publicUrl = `/api/files/${filename}`
     
     return NextResponse.json({ 
       success: true, 
