@@ -51,5 +51,9 @@ prompt
 # SQLite database
 data/
 
+# Photo source folder (synced to public/images via npm run sync-content)
+content/
+
+
 # PM2 logs
 logs/

@@ -1,21 +1,45 @@
 'use client'
 
 import Image from 'next/image'
+import { useState, useEffect, useCallback } from 'react'
 import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
+import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
+import { galleryImages } from '@/lib/content-manifest'
+
+// Varied tile spans for a masonry-like grid
+function spanFor(i: number): string {
+  if (i % 7 === 0) return 'col-span-2 row-span-2'
+  if (i % 5 === 3) return 'row-span-2'
+  if (i % 3 === 2) return 'col-span-2'
+  return ''
+}
 
 export function Gallery() {
   const { t } = useLanguage()
-  
-  const galleryImages = [
-    { src: '/images/gallery-forest.jpg', titleKey: 'forest' as const },
-    { src: '/images/gallery-waterfall.jpg', titleKey: 'waterfall' as const },
-    { src: '/images/gallery-dining.jpg', titleKey: 'terrace' as const },
-    { src: '/images/room-cottage.jpg', titleKey: 'cottage' as const },
-    { src: '/images/hero-bg.jpg', titleKey: 'landscape' as const },
-    { src: '/images/room-family.jpg', titleKey: 'mountainView' as const },
-  ]
-  
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const lightboxOpen = lightboxIndex !== null
+
+  const showNext = useCallback(() => {
+    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryImages.length))
+  }, [])
+
+  const showPrev = useCallback(() => {
+    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryImages.length) % galleryImages.length))
+  }, [])
+
+  // Keyboard navigation in lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') showNext()
+      if (e.key === 'ArrowLeft') showPrev()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightboxOpen, showNext, showPrev])
+
   return (
     <section id="gallery" className="relative z-10 min-h-screen flex items-center py-16">
       <div className="container mx-auto px-4">
@@ -26,27 +50,72 @@ export function Gallery() {
             {t.gallery.description}
           </p>
         </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
-          {galleryImages.map((item, i) => (
-            <div key={i} className="relative overflow-hidden rounded-xl group cursor-pointer aspect-square">
-              <Image 
-                src={item.src} 
-                alt={t.gallery[item.titleKey]} 
+
+        {/* Masonry-like grid with varied tile sizes */}
+        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] md:auto-rows-[180px] gap-3 max-w-5xl mx-auto">
+          {galleryImages.map((src, i) => (
+            <button
+              key={src}
+              onClick={() => setLightboxIndex(i)}
+              className={`relative overflow-hidden rounded-xl group cursor-pointer ${spanFor(i)}`}
+              aria-label={`${t.gallery.title} — ${i + 1}`}
+            >
+              <Image
+                src={src}
+                alt={`${t.gallery.title} — ${i + 1}`}
                 fill
-                loading={item.src === '/images/room-cottage.jpg' ? 'eager' : 'lazy'}
-                sizes="(max-width: 768px) 50vw, 33vw"
+                loading="lazy"
+                sizes="(max-width: 768px) 50vw, 25vw"
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="absolute bottom-4 left-4 text-white">
-                  <p className="font-medium">{t.gallery[item.titleKey]}</p>
-                </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      <Dialog open={lightboxOpen} onOpenChange={(o) => { if (!o) setLightboxIndex(null) }}>
+        <DialogContent className="max-w-[95vw] sm:max-w-[90vw] lg:max-w-[80vw] bg-black/90 border-white/10 p-2 sm:p-4">
+          <DialogTitle className="sr-only">{t.gallery.title}</DialogTitle>
+          <DialogDescription className="sr-only">{t.gallery.description}</DialogDescription>
+          {lightboxIndex !== null && (
+            <div className="relative w-full h-[70vh] sm:h-[80vh]">
+              <Image
+                src={galleryImages[lightboxIndex]}
+                alt={`${t.gallery.title} — ${lightboxIndex + 1}`}
+                fill
+                sizes="90vw"
+                className="object-contain"
+                priority
+              />
+
+              {/* Prev / Next */}
+              <button
+                onClick={showPrev}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={showNext}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Counter */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 text-white text-sm px-3 py-1 rounded-full">
+                {lightboxIndex + 1} / {galleryImages.length}
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }

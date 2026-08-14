@@ -146,6 +146,7 @@ scp -r public/uploads/ user@server:/path/to/project/public/
 | `npm run lint` | Проверка ESLint |
 | `npm test` | Запуск тестов |
 | `npm run export-demo` | Экспорт БД в demo-data.ts для Vercel |
+| `npm run sync-content` | Синк фото из content/ в public/images + обновление БД |
 
 ## 📝 Лицензия
 

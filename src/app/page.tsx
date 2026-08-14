@@ -16,6 +16,7 @@ import {
   AdminDialog,
   ScrollIndicator
 } from '@/components'
+import { BackgroundSlideshow } from '@/components/BackgroundSlideshow'
 
 // Hooks
 import { useToast } from '@/hooks/use-toast'
@@ -166,15 +167,8 @@ export default function GuestHouseLanding() {
 
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden relative">
-      {/* Fixed background image */}
-      <div
-        className="fixed -inset-5 z-0"
-        style={{
-          backgroundImage: 'url(/images/hero-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      {/* Fixed background slideshow (photos from content/bckgrnd) */}
+      <BackgroundSlideshow />
       {/* Continuous page-wide gradient overlay — no seams between sections */}
       <div aria-hidden className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/45 to-[#261A0B] pointer-events-none" />
 

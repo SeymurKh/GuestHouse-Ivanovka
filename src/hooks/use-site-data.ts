@@ -12,20 +12,21 @@ export function useSiteData() {
   const [email, setEmail] = useState('roomcommunityofficial@gmail.com')
   const [loading, setLoading] = useState(true)
 
-  // Collect ALL images from all rooms with room info
-  const allRoomImages: RoomImage[] = useMemo(
-    () =>
-      rooms.flatMap((room) =>
-        parseImages(room.images).map((img) => ({
-          image: img,
-          roomName: room.name,
-          price: room.price,
-          capacity: room.capacity,
-          roomId: room.id,
-        }))
-      ),
-    [rooms]
-  )
+  // Hero slider: 5 random photos from each room, shuffled together (10 total)
+  const allRoomImages: RoomImage[] = useMemo(() => {
+    const shuffled = <T,>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5)
+
+    const picked = rooms.flatMap((room) =>
+      shuffled(parseImages(room.images)).slice(0, 5).map((img) => ({
+        image: img,
+        roomName: room.name,
+        price: room.price,
+        capacity: room.capacity,
+        roomId: room.id,
+      }))
+    )
+    return shuffled(picked)
+  }, [rooms])
 
   // Initialize data
   useEffect(() => {

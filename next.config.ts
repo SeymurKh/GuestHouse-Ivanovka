@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   serverExternalPackages: ['better-sqlite3'],
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
