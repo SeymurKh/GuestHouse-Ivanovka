@@ -25,7 +25,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
 
           {/* Left - Contact Info */}
-          <div>
+          <div data-reveal>
             <Badge className="mb-4 bg-white/20 text-white border-white/30">{t.contact.badge}</Badge>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-[#b8ad9a]">{t.contact.title}</h2>
             <p className="text-white/80 mb-6 text-sm md:text-base">
@@ -69,7 +69,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
           </div>
 
           {/* Right - Floating Reviews */}
-          <div className="relative h-[400px] lg:h-[500px]">
+          <div className="relative h-[400px] lg:h-[500px]" data-reveal>
             <div className="absolute inset-0 flex items-center justify-center">
               {reviews.map((review, idx) => (
                 <div
@@ -122,7 +122,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
         </div>
 
         {/* Embedded Google Map */}
-        <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+        <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl" data-reveal>
           <iframe
             src="https://maps.google.com/maps?q=Ivanovka,+Ismayilli,+Azerbaijan&z=12&output=embed"
             className="w-full h-64 md:h-80 block"

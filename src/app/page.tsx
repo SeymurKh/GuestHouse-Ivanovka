@@ -21,6 +21,7 @@ import { BackgroundSlideshow } from '@/components/BackgroundSlideshow'
 // Hooks
 import { useToast } from '@/hooks/use-toast'
 import { useSiteData } from '@/hooks/use-site-data'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 // Types
 import { Room } from '@/types'
@@ -61,6 +62,9 @@ export default function GuestHouseLanding() {
   // Slider state
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentReview, setCurrentReview] = useState(0)
+
+  // Reveal-on-scroll animations (activates after content loads)
+  useScrollReveal(!loading)
 
   // Auto-slide effect for hero
   useEffect(() => {

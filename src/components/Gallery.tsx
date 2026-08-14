@@ -8,7 +8,10 @@ import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
 import { galleryImages } from '@/lib/content-manifest'
 
-// Varied tile spans for a masonry-like grid
+// Photos visible in the grid; the rest open in the lightbox via the "+N" tile
+const TEASER_COUNT = 14
+
+// Varied tile spans for a masonry-like grid (grid-flow-dense fills the gaps)
 function spanFor(i: number): string {
   if (i % 7 === 0) return 'col-span-2 row-span-2'
   if (i % 5 === 3) return 'row-span-2'
@@ -43,7 +46,7 @@ export function Gallery() {
   return (
     <section id="gallery" className="relative z-10 min-h-screen flex items-center py-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+        <div className="text-center mb-8" data-reveal>
           <Badge className="mb-4">{t.gallery.badge}</Badge>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.gallery.title}</h2>
           <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base">
@@ -51,28 +54,39 @@ export function Gallery() {
           </p>
         </div>
 
-        {/* Masonry-like grid with varied tile sizes */}
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] md:auto-rows-[180px] gap-3 max-w-5xl mx-auto">
-          {galleryImages.map((src, i) => (
-            <button
-              key={src}
-              onClick={() => setLightboxIndex(i)}
-              className={`relative overflow-hidden rounded-xl group cursor-pointer ${spanFor(i)}`}
-              aria-label={`${t.gallery.title} — ${i + 1}`}
-            >
-              <Image
-                src={src}
-                alt={`${t.gallery.title} — ${i + 1}`}
-                fill
-                loading="lazy"
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </button>
-          ))}
+        {/* Masonry-like grid: first photos visible, last tile shows "+N" — click opens the lightbox */}
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-dense auto-rows-[140px] md:auto-rows-[180px] gap-3 max-w-5xl mx-auto" data-reveal>
+          {galleryImages.slice(0, TEASER_COUNT).map((src, i) => {
+            const remaining = galleryImages.length - TEASER_COUNT
+            const showMore = i === TEASER_COUNT - 1 && remaining > 0
+            return (
+              <button
+                key={src}
+                onClick={() => setLightboxIndex(i)}
+                className={`relative overflow-hidden rounded-xl group cursor-pointer ${spanFor(i)}`}
+                aria-label={`${t.gallery.title} — ${i + 1}`}
+              >
+                <Image
+                  src={src}
+                  alt={`${t.gallery.title} — ${i + 1}`}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {showMore ? (
+                  <div className="absolute inset-0 bg-black/55 group-hover:bg-black/70 transition-colors flex flex-col items-center justify-center text-white">
+                    <ZoomIn className="w-6 h-6 mb-1" />
+                    <span className="text-2xl font-bold leading-none">+{remaining}</span>
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                    <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                )}
+              </button>
+            )
+          })}
         </div>
       </div>
 

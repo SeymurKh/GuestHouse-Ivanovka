@@ -21,7 +21,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
   return (
     <section id="rooms" className="relative z-10 min-h-screen flex items-center py-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+        <div className="text-center mb-8" data-reveal>
           <Badge className="mb-4">{t.rooms.badge}</Badge>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.rooms.title}</h2>
         </div>
@@ -37,6 +37,8 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
                 key={room.id} 
                 className="overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 bg-[#F7E9D7] flex flex-col hover:scale-[1.02] py-0 gap-0"
                 onClick={() => onRoomClick(room)}
+                data-reveal
+                style={{ transitionDelay: `${index * 120}ms` }}
               >
                 {/* Image Section - Fixed Height */}
                 <div className="relative h-48 sm:h-48 md:h-56 overflow-hidden flex-shrink-0">
