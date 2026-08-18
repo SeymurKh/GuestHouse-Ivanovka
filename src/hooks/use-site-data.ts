@@ -10,7 +10,6 @@ interface SiteSettings {
   phone: string
   email: string
   address: string
-  description: string
 }
 
 export function useSiteData() {
@@ -19,7 +18,6 @@ export function useSiteData() {
   const [phone, setPhone] = useState('+994508080069')
   const [email, setEmail] = useState('roomcommunityofficial@gmail.com')
   const [address, setAddress] = useState('')
-  const [description, setDescription] = useState('')
   const [gallery, setGallery] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -49,7 +47,6 @@ export function useSiteData() {
         if (demoSettings.phone) setPhone(demoSettings.phone)
         if (demoSettings.email) setEmail(demoSettings.email)
         if (demoSettings.address) setAddress(demoSettings.address)
-        if (demoSettings.description) setDescription(demoSettings.description)
         setGallery(demoGalleryImages)
         setLoading(false)
         return
@@ -78,7 +75,6 @@ export function useSiteData() {
           if (settingsData?.phone) setPhone(settingsData.phone)
           if (settingsData?.email) setEmail(settingsData.email)
           if (settingsData?.address) setAddress(settingsData.address || '')
-          if (settingsData?.description) setDescription(settingsData.description || '')
         }
 
         if (galleryRes.ok) {
@@ -116,7 +112,6 @@ export function useSiteData() {
         if (data?.phone) setPhone(data.phone)
         if (data?.email) setEmail(data.email)
         setAddress(data?.address || '')
-        setDescription(data?.description || '')
       }
     } catch {
       // Failed to refresh settings
@@ -143,7 +138,6 @@ export function useSiteData() {
     phone,
     email,
     address,
-    description,
     gallery,
     loading,
     allRoomImages,

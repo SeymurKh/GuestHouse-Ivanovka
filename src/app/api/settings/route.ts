@@ -1,7 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { mapSettingsRow, generateId } from '@/lib/schema'
-import { withAdminAuth, validateInput, sanitize } from '@/lib/middleware'
+import { withAdminAuth, sanitize } from '@/lib/middleware'
+import { createLocalizedString } from '@/lib/localize'
+
+// Normalize address to a localized JSON string.
+// Accepts either an object {ru,az,en} (new format) or a plain string (legacy → treated as RU).
+function normalizeAddress(value: unknown): string {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const obj = value as Record<string, unknown>
+    const str = (v: unknown) => (typeof v === 'string' ? v : '')
+    return createLocalizedString(str(obj.ru), str(obj.az), str(obj.en))
+  }
+  if (typeof value === 'string') {
+    return createLocalizedString(value, '', '')
+  }
+  return createLocalizedString('', '', '')
+}
 
 // GET - получить настройки сайта
 export async function GET() {
@@ -18,16 +33,20 @@ export async function GET() {
 export const PUT = withAdminAuth(async (request: NextRequest) => {
   try {
     const body = await request.json()
-    const { phone, email, address, description } = body
+    const { phone, email, address } = body
 
-    // Validate input
-    const validation = validateInput.settings({ phone, email, address, description })
-    if (!validation.isValid) {
-      return NextResponse.json(
-        { error: validation.errors[0] },
-        { status: 400 }
-      )
+    if (!phone || typeof phone !== 'string' || phone.trim().length === 0 || phone.length > 50) {
+      return NextResponse.json({ error: 'Phone is required and under 50 characters' }, { status: 400 })
     }
+
+    if (email && typeof email === 'string') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(email)) {
+        return NextResponse.json({ error: 'Invalid email format' }, { status: 400 })
+      }
+    }
+
+    const addressValue = normalizeAddress(address)
 
     const existing = db.prepare('SELECT * FROM SiteSettings LIMIT 1').get() as Record<string, unknown> | undefined
 
@@ -38,28 +57,25 @@ export const PUT = withAdminAuth(async (request: NextRequest) => {
         UPDATE SiteSettings SET
           phone = @phone,
           email = @email,
-          address = @address,
-          description = @description
+          address = @address
         WHERE id = @id
       `).run({
         id: existing.id,
         phone: sanitize.phone(phone),
         email: sanitize.email(email || ''),
-        address: sanitize.text(address || ''),
-        description: sanitize.text(description || ''),
+        address: addressValue,
       })
       row = db.prepare('SELECT * FROM SiteSettings WHERE id = ?').get(existing.id) as Record<string, unknown>
     } else {
       const id = generateId()
       db.prepare(`
-        INSERT INTO SiteSettings (id, phone, email, address, description)
-        VALUES (@id, @phone, @email, @address, @description)
+        INSERT INTO SiteSettings (id, phone, email, address)
+        VALUES (@id, @phone, @email, @address)
       `).run({
         id,
         phone: sanitize.phone(phone),
         email: sanitize.email(email || ''),
-        address: sanitize.text(address || ''),
-        description: sanitize.text(description || ''),
+        address: addressValue,
       })
       row = db.prepare('SELECT * FROM SiteSettings WHERE id = ?').get(id) as Record<string, unknown>
     }

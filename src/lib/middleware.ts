@@ -174,10 +174,6 @@ export const validateInput = {
       errors.push('Address must be under 200 characters')
     }
 
-    if (data.description && typeof data.description === 'string' && data.description.length > 1000) {
-      errors.push('Description must be under 1000 characters')
-    }
-
     return { isValid: errors.length === 0, errors }
   },
 }

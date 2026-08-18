@@ -79,7 +79,6 @@ export function RoomModal({ room, open, onOpenChange, phone, currentImageIndex, 
               className="flex-1 gap-1.5 sm:gap-2 bg-[#003580] hover:bg-[#002a66] text-white text-xs sm:text-sm"
             >
               <a href={room.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/booking-logo.svg" alt="Booking.com" className="w-4 h-4 sm:w-5 sm:h-5 rounded" />
                 Booking.com
               </a>

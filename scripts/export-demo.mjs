@@ -58,13 +58,11 @@ const demoSettings = settings
       phone: settings.phone,
       email: settings.email || '',
       address: settings.address || '',
-      description: settings.description || '',
     }
   : {
       phone: '+994508080069',
       email: 'roomcommunityofficial@gmail.com',
-      address: 'Азербайджан, г. Исмаиллы, посёлок Ивановка',
-      description: 'Уютные гостевые дома в горах Азербайджана. Отдых в окружении величественных гор и густых лесов.',
+      address: JSON.stringify({ ru: 'Азербайджан, г. Исмаиллы, посёлок Ивановка', az: '', en: '' }),
     }
 
 const now = new Date()

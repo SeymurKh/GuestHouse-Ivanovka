@@ -7,6 +7,7 @@ import { Mail, MapPin, Star } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { Review } from '@/types'
 import { useLanguage } from '@/lib/LanguageContext'
+import { getLocalizedValue } from '@/lib/localize'
 
 interface ContactProps {
   phone: string
@@ -18,8 +19,8 @@ interface ContactProps {
 }
 
 export function Contact({ phone, email, address, reviews, currentReview, setCurrentReview }: ContactProps) {
-  const { t } = useLanguage()
-  const displayAddress = address || t.contact.addressValue
+  const { t, lang } = useLanguage()
+  const displayAddress = getLocalizedValue(address, lang, t.contact.addressValue)
 
   return (
     <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 text-white">

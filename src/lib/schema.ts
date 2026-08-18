@@ -75,8 +75,7 @@ export function createDb(): Database.Database {
       id TEXT PRIMARY KEY,
       phone TEXT NOT NULL,
       email TEXT,
-      address TEXT,
-      description TEXT
+      address TEXT
     );
 
     CREATE TABLE IF NOT EXISTS GalleryImage (
@@ -158,7 +157,6 @@ export function mapSettingsRow(row: Record<string, unknown>) {
     phone: row.phone as string,
     email: (row.email as string) || null,
     address: (row.address as string) || null,
-    description: (row.description as string) || null,
   }
 }
 

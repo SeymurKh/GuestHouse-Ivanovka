@@ -26,7 +26,6 @@ export function BookingButton({ rooms, className, size = 'lg' }: BookingButtonPr
   return (
     <>
       <Button size={size} onClick={() => setOpen(true)} className={className}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/booking-logo.svg" alt="" className="w-5 h-5 rounded" />
         Booking.com
       </Button>

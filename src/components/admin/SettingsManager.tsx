@@ -3,22 +3,30 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Loader2, Save } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Loader2, Save, Globe } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { parseLocalizedStringToForm } from '@/lib/localize'
+import { languages, Language } from '@/lib/i18n'
 
 interface SettingsManagerProps {
   authHeaders?: Record<string, string>
   onSaved?: () => void
 }
 
+interface LocalizedField {
+  ru: string
+  az: string
+  en: string
+}
+
 export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) {
   const { toast } = useToast()
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  const [address, setAddress] = useState('')
-  const [description, setDescription] = useState('')
+  const [address, setAddress] = useState<LocalizedField>({ ru: '', az: '', en: '' })
+  const [editLang, setEditLang] = useState<Language>('ru')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
 
@@ -32,8 +40,7 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
           if (data) {
             setPhone(data.phone || '')
             setEmail(data.email || '')
-            setAddress(data.address || '')
-            setDescription(data.description || '')
+            setAddress(parseLocalizedStringToForm(data.address))
           }
         }
       } catch {
@@ -45,13 +52,25 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
     loadSettings()
   }, [])
 
+  const updateAddress = (lang: Language, value: string) => {
+    setAddress((prev) => ({ ...prev, [lang]: value }))
+  }
+
   const save = async () => {
     setSaving(true)
     try {
       const res = await fetch('/api/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', ...(authHeaders ?? {}) },
-        body: JSON.stringify({ phone, email, address, description }),
+        body: JSON.stringify({
+          phone,
+          email,
+          address: {
+            ru: address.ru,
+            az: address.az,
+            en: address.en,
+          },
+        }),
       })
 
       if (res.ok) {
@@ -87,6 +106,14 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
     )
   }
 
+  const langTabClass = (lang: Language) => `
+    px-3 py-1.5 text-sm rounded-md transition-colors flex items-center gap-1
+    ${editLang === lang
+      ? 'bg-primary text-white'
+      : 'bg-muted hover:bg-muted/80'
+    }
+  `
+
   return (
     <div className="space-y-4 py-4">
       <div className="grid gap-4">
@@ -109,23 +136,35 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
             placeholder="email@example.com"
           />
         </div>
+
+        {/* Localized address */}
         <div>
-          <Label htmlFor="settings-address">Адрес</Label>
+          <Label htmlFor="settings-address" className="flex items-center gap-2">
+            Адрес
+            <Badge variant="outline" className="text-xs">{editLang.toUpperCase()}</Badge>
+          </Label>
+
+          <div className="flex items-center gap-2 mt-2 mb-2">
+            <Globe className="w-4 h-4 text-muted-foreground" />
+            <div className="flex gap-1">
+              {languages.map((l) => (
+                <button
+                  key={l.code}
+                  type="button"
+                  onClick={() => setEditLang(l.code)}
+                  className={langTabClass(l.code)}
+                >
+                  {l.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <Input
             id="settings-address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={address[editLang]}
+            onChange={(e) => updateAddress(editLang, e.target.value)}
             placeholder="Азербайджан, г. Исмаиллы, посёлок Ивановка"
-          />
-        </div>
-        <div>
-          <Label htmlFor="settings-description">Описание сайта</Label>
-          <Textarea
-            id="settings-description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            placeholder="Краткое описание сайта"
           />
         </div>
       </div>
