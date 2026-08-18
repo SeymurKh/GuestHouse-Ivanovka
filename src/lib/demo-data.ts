@@ -135,6 +135,7 @@ export const demoReviews: Review[] = [
     "guestName": "Mahammad",
     "rating": 5,
     "comment": "Все было очень чисто и аккуратно 10/10",
+    "isApproved": true,
     "createdAt": "2026-08-15 11:26:05"
   },
   {
@@ -142,6 +143,7 @@ export const demoReviews: Review[] = [
     "guestName": "Yekaterina",
     "rating": 5,
     "comment": "We had a wonderful stay! The house is very clean, cozy, and has a charming countryside atmosphere. It is equipped with absolutely everything you might need for a comfortable stay, so we didn't miss a thing.",
+    "isApproved": true,
     "createdAt": "2026-05-20 21:00:04"
   },
   {
@@ -149,6 +151,7 @@ export const demoReviews: Review[] = [
     "guestName": "Sara",
     "rating": 5,
     "comment": "Понравилось все! Интерьер с натуральным деревом, аккуратные изюминки делающие пребывание всё более теплым и уютным. Завтрак был свежим, вкусным, чистым, аккуратное, натуральное! Хозяин всегда был на связи по всем вопросам. Помогал разобраться при надобности (независимо от часа дня). Мы провели очень веселые, приятные выходные с самоварным чаем и рыбой на мангале своими руками, под свою музыку из-под колонок. Спасибо за все! 🙏🏻",
+    "isApproved": true,
     "createdAt": "2026-05-20 21:00:03"
   },
   {
@@ -156,6 +159,7 @@ export const demoReviews: Review[] = [
     "guestName": "Ranga",
     "rating": 5,
     "comment": "Very good location and design",
+    "isApproved": true,
     "createdAt": "2026-05-20 20:59:56"
   }
 ]

@@ -11,13 +11,15 @@ import { useLanguage } from '@/lib/LanguageContext'
 interface ContactProps {
   phone: string
   email: string
+  address?: string
   reviews: Review[]
   currentReview: number
   setCurrentReview: (index: number) => void
 }
 
-export function Contact({ phone, email, reviews, currentReview, setCurrentReview }: ContactProps) {
+export function Contact({ phone, email, address, reviews, currentReview, setCurrentReview }: ContactProps) {
   const { t } = useLanguage()
+  const displayAddress = address || t.contact.addressValue
 
   return (
     <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 text-white">
@@ -62,7 +64,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
                 </div>
                 <div>
                   <p className="text-xs text-white/60">{t.contact.address}</p>
-                  <p className="font-medium text-[#b8ad9a] group-hover:underline">{t.contact.addressValue}</p>
+                  <p className="font-medium text-[#b8ad9a] group-hover:underline">{displayAddress}</p>
                 </div>
               </a>
             </div>
@@ -127,7 +129,7 @@ export function Contact({ phone, email, reviews, currentReview, setCurrentReview
             src="https://maps.google.com/maps?q=Ivanovka,+Ismayilli,+Azerbaijan&z=12&output=embed"
             className="w-full h-64 md:h-80 block"
             loading="lazy"
-            title={t.contact.addressValue}
+            title={displayAddress}
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />

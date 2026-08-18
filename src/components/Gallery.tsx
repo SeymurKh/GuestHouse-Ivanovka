@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
-import { galleryImages } from '@/lib/content-manifest'
 
 // Photos visible in the grid; the rest open in the lightbox via the "+N" tile
 const TEASER_COUNT = 14
@@ -19,18 +18,32 @@ function spanFor(i: number): string {
   return ''
 }
 
-export function Gallery() {
+interface GalleryProps {
+  images: string[]
+}
+
+export function Gallery({ images }: GalleryProps) {
   const { t } = useLanguage()
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const lightboxOpen = lightboxIndex !== null
 
+  const galleryImages = images
+
   const showNext = useCallback(() => {
-    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryImages.length))
-  }, [])
+    setLightboxIndex((i) => {
+      if (i === null) return null
+      if (galleryImages.length === 0) return null
+      return (i + 1) % galleryImages.length
+    })
+  }, [galleryImages.length])
 
   const showPrev = useCallback(() => {
-    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryImages.length) % galleryImages.length))
-  }, [])
+    setLightboxIndex((i) => {
+      if (i === null) return null
+      if (galleryImages.length === 0) return null
+      return (i - 1 + galleryImages.length) % galleryImages.length
+    })
+  }, [galleryImages.length])
 
   // Keyboard navigation in lightbox
   useEffect(() => {
@@ -42,6 +55,22 @@ export function Gallery() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [lightboxOpen, showNext, showPrev])
+
+  if (galleryImages.length === 0) {
+    return (
+      <section id="gallery" className="relative z-10 min-h-screen flex items-center py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8" data-reveal>
+            <Badge className="mb-4">{t.gallery.badge}</Badge>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#b8ad9a]">{t.gallery.title}</h2>
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-base">
+              {t.gallery.description}
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="gallery" className="relative z-10 min-h-screen flex items-center py-16">
@@ -95,7 +124,7 @@ export function Gallery() {
         <DialogContent className="max-w-[95vw] sm:max-w-[90vw] lg:max-w-[80vw] bg-black/90 border-white/10 p-2 sm:p-4">
           <DialogTitle className="sr-only">{t.gallery.title}</DialogTitle>
           <DialogDescription className="sr-only">{t.gallery.description}</DialogDescription>
-          {lightboxIndex !== null && (
+          {lightboxIndex !== null && lightboxIndex < galleryImages.length && (
             <div className="relative w-full h-[70vh] sm:h-[80vh]">
               <Image
                 src={galleryImages[lightboxIndex]}

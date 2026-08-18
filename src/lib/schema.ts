@@ -2,6 +2,7 @@
 import Database from 'better-sqlite3'
 import path from 'path'
 import { mkdirSync } from 'fs'
+import { galleryImages } from './content-manifest'
 
 const DB_DIR = path.join(process.cwd(), 'data')
 const DB_PATH = path.join(DB_DIR, 'guesthouse.db')
@@ -12,6 +13,25 @@ function generateId(): string {
   return `c${timestamp}${random}`
 }
 
+function tableExists(db: Database.Database, tableName: string): boolean {
+  const row = db
+    .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?")
+    .get(tableName) as { name: string } | undefined
+  return Boolean(row)
+}
+
+function seedGallery(db: Database.Database) {
+  const insert = db.prepare(
+    'INSERT INTO GalleryImage (id, url, sortOrder) VALUES (@id, @url, @sortOrder)'
+  )
+  const insertAll = db.transaction((items: string[]) => {
+    items.forEach((url, index) => {
+      insert.run({ id: generateId(), url, sortOrder: index })
+    })
+  })
+  insertAll(galleryImages)
+}
+
 export function createDb(): Database.Database {
   // Ensure data directory exists
   mkdirSync(DB_DIR, { recursive: true })
@@ -19,6 +39,10 @@ export function createDb(): Database.Database {
   const db = new Database(DB_PATH)
   db.pragma('journal_mode = WAL')
   db.pragma('foreign_keys = ON')
+
+  // Seed the gallery only when the table is first created,
+  // so deleting all photos doesn't re-seed on the next restart.
+  const galleryExisted = tableExists(db, 'GalleryImage')
 
   // Create tables if they don't exist
   db.exec(`
@@ -54,6 +78,13 @@ export function createDb(): Database.Database {
       address TEXT,
       description TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS GalleryImage (
+      id TEXT PRIMARY KEY,
+      url TEXT NOT NULL,
+      sortOrder INTEGER NOT NULL DEFAULT 0,
+      createdAt TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `)
 
   // Migration for existing databases: add bookingUrl if missing
@@ -61,6 +92,10 @@ export function createDb(): Database.Database {
     db.exec("ALTER TABLE Room ADD COLUMN bookingUrl TEXT NOT NULL DEFAULT ''")
   } catch {
     // Column already exists — nothing to do
+  }
+
+  if (!galleryExisted) {
+    seedGallery(db)
   }
 
   return db
@@ -124,6 +159,16 @@ export function mapSettingsRow(row: Record<string, unknown>) {
     email: (row.email as string) || null,
     address: (row.address as string) || null,
     description: (row.description as string) || null,
+  }
+}
+
+// Helper to convert SQLite row to app-level GalleryImage type
+export function mapGalleryImageRow(row: Record<string, unknown>) {
+  return {
+    id: row.id as string,
+    url: row.url as string,
+    sortOrder: row.sortOrder as number,
+    createdAt: row.createdAt as string,
   }
 }
 

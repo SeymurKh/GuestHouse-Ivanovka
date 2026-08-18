@@ -23,6 +23,14 @@ export interface Review {
   guestName: string
   rating: number
   comment: string
+  isApproved: boolean
+  createdAt: string
+}
+
+export interface GalleryImage {
+  id: string
+  url: string
+  sortOrder: number
   createdAt: string
 }
 

@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { MessageSquare, Home } from 'lucide-react'
+import { MessageSquare, Home, Images, Settings } from 'lucide-react'
 import { Room } from '@/types'
 import { RoomEditor } from './admin/RoomEditor'
 import { ReviewManager } from './admin/ReviewManager'
+import { SettingsManager } from './admin/SettingsManager'
+import { GalleryManager } from './admin/GalleryManager'
 
 interface AdminDialogProps {
   open: boolean
@@ -22,10 +24,12 @@ interface AdminDialogProps {
   onRoomCreate: (room: Room) => void
   onRoomDelete?: (roomId: string) => void
   onReviewsUpdate?: () => void
+  onSettingsSaved?: () => void
+  onGalleryUpdate?: () => void
 }
 
 // Tab type
-type AdminTab = 'rooms' | 'reviews'
+type AdminTab = 'rooms' | 'reviews' | 'gallery' | 'settings'
 
 export function AdminDialog({
   open,
@@ -40,6 +44,8 @@ export function AdminDialog({
   onRoomCreate,
   onRoomDelete,
   onReviewsUpdate,
+  onSettingsSaved,
+  onGalleryUpdate,
 }: AdminDialogProps) {
   // Tab state
   const [activeTab, setActiveTab] = useState<AdminTab>('rooms')
@@ -84,7 +90,7 @@ export function AdminDialog({
             </DialogHeader>
 
             {/* Main Tabs */}
-            <div className="flex gap-2 p-1 bg-muted/50 rounded-lg">
+            <div className="flex flex-wrap gap-2 p-1 bg-muted/50 rounded-lg">
               <button
                 type="button"
                 onClick={() => setActiveTab('rooms')}
@@ -100,6 +106,22 @@ export function AdminDialog({
               >
                 <MessageSquare className="w-4 h-4" />
                 Отзывы
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('gallery')}
+                className={mainTabClass('gallery')}
+              >
+                <Images className="w-4 h-4" />
+                Галерея
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('settings')}
+                className={mainTabClass('settings')}
+              >
+                <Settings className="w-4 h-4" />
+                Настройки
               </button>
             </div>
 
@@ -120,6 +142,20 @@ export function AdminDialog({
                 isAdmin={isAdmin}
                 authHeaders={authHeaders}
                 onReviewsUpdate={onReviewsUpdate}
+              />
+            )}
+
+            {activeTab === 'gallery' && (
+              <GalleryManager
+                authHeaders={authHeaders}
+                onGalleryUpdate={onGalleryUpdate}
+              />
+            )}
+
+            {activeTab === 'settings' && (
+              <SettingsManager
+                authHeaders={authHeaders}
+                onSaved={onSettingsSaved}
               />
             )}
           </>

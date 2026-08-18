@@ -49,6 +49,7 @@ const demoReviews = reviews.map((row) => ({
   guestName: row.guestName,
   rating: row.rating,
   comment: row.comment,
+  isApproved: Boolean(row.isApproved),
   createdAt: row.createdAt,
 }))
 

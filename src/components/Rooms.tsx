@@ -27,7 +27,7 @@ export function Rooms({ rooms, onRoomClick }: RoomsProps) {
         </div>
         
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-          {rooms.slice(0, 2).map((room, index) => {
+          {rooms.map((room, index) => {
             const roomName = getLocalizedValue(room.name, lang, room.name)
             const roomDescription = getLocalizedValue(room.description, lang, '')
             const isFirstRoom = index === 0

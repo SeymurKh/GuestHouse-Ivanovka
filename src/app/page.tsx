@@ -40,9 +40,13 @@ export default function GuestHouseLanding() {
     reviews,
     phone,
     email,
+    address,
+    gallery,
     loading,
     allRoomImages,
     refreshReviews,
+    refreshSettings,
+    refreshGallery,
   } = useSiteData()
 
   // UI state
@@ -201,12 +205,13 @@ export default function GuestHouseLanding() {
       />
 
       {/* Gallery Section */}
-      <Gallery />
+      <Gallery images={gallery} />
 
       {/* Contact Section */}
       <Contact
         phone={phone}
         email={email}
+        address={address}
         reviews={reviews}
         currentReview={currentReview}
         setCurrentReview={setCurrentReview}
@@ -239,6 +244,8 @@ export default function GuestHouseLanding() {
         onRoomCreate={handleRoomCreate}
         onRoomDelete={handleRoomDelete}
         onReviewsUpdate={refreshReviews}
+        onSettingsSaved={refreshSettings}
+        onGalleryUpdate={refreshGallery}
       />
 
       {/* Dynamic Scroll Indicator */}
