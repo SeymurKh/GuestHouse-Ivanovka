@@ -1,8 +1,15 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "fs";
+import path from "path";
 
 export const alt = "ROOM Guest Houses — Отдых в горах Азербайджана";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// Встраиваем настоящее лого как data-URI, чтобы Satori корректно его отрисовал.
+const logoSrc = `data:image/png;base64,${readFileSync(
+  path.join(process.cwd(), "public", "vacationhomelogo.png")
+).toString("base64")}`;
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -26,26 +33,17 @@ export default function OpengraphImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "24px",
-            marginBottom: "32px",
+            gap: "28px",
+            marginBottom: "36px",
           }}
         >
-          <div
-            style={{
-              width: "72px",
-              height: "72px",
-              borderRadius: "16px",
-              background: "#b8ad9a",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#261A0B",
-              fontSize: "40px",
-              fontWeight: 700,
-            }}
-          >
-            R
-          </div>
+          <img
+            src={logoSrc}
+            alt="ROOM Guest Houses"
+            width={104}
+            height={104}
+            style={{ borderRadius: "18px", objectFit: "cover" }}
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "64px", fontWeight: 700, lineHeight: 1.1 }}>
               ROOM
