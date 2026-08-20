@@ -127,7 +127,7 @@ export function Contact({ phone, email, address, reviews, currentReview, setCurr
         {/* Embedded Google Map */}
         <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl" data-reveal>
           <iframe
-            src="https://maps.google.com/maps?q=Ivanovka,+Ismayilli,+Azerbaijan&z=12&output=embed"
+            src="https://www.google.com/maps/d/u/2/embed?mid=1Phwsu6wD4HhANCfhayF5D5CK4oHAn20&ehbc=2E312F"
             className="w-full h-64 md:h-80 block"
             loading="lazy"
             title={displayAddress}
