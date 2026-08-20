@@ -125,10 +125,10 @@ export function Contact({ phone, email, address, reviews, currentReview, setCurr
         </div>
 
         {/* Embedded Google Map */}
-        <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl" data-reveal>
+        <div className="mt-10 lg:mt-14 max-w-6xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl h-64 md:h-80" data-reveal>
           <iframe
             src="https://www.google.com/maps/d/u/2/embed?mid=1Phwsu6wD4HhANCfhayF5D5CK4oHAn20&ehbc=2E312F"
-            className="w-full h-64 md:h-80 block"
+            className="w-full h-[calc(100%_+_4.5rem)] -mt-[4.5rem] block"
             loading="lazy"
             title={displayAddress}
             referrerPolicy="no-referrer-when-downgrade"
