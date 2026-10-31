@@ -25,6 +25,7 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
   const { toast } = useToast()
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [instagram, setInstagram] = useState('')
   const [address, setAddress] = useState<LocalizedField>({ ru: '', az: '', en: '' })
   const [editLang, setEditLang] = useState<Language>('ru')
   const [loading, setLoading] = useState(true)
@@ -40,6 +41,7 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
           if (data) {
             setPhone(data.phone || '')
             setEmail(data.email || '')
+            setInstagram(data.instagram || '')
             setAddress(parseLocalizedStringToForm(data.address))
           }
         }
@@ -65,6 +67,7 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
         body: JSON.stringify({
           phone,
           email,
+          instagram,
           address: {
             ru: address.ru,
             az: address.az,
@@ -134,6 +137,15 @@ export function SettingsManager({ authHeaders, onSaved }: SettingsManagerProps) 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
+          />
+        </div>
+        <div>
+          <Label htmlFor="settings-instagram">Instagram (ссылка на профиль)</Label>
+          <Input
+            id="settings-instagram"
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+            placeholder="https://www.instagram.com/roomguesthouses/"
           />
         </div>
 

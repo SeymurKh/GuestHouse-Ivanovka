@@ -41,6 +41,7 @@ export default function GuestHouseLanding() {
     phone,
     email,
     address,
+    instagram,
     gallery,
     loading,
     allRoomImages,
@@ -211,6 +212,7 @@ export default function GuestHouseLanding() {
       <Contact
         phone={phone}
         email={email}
+        instagram={instagram}
         address={address}
         reviews={reviews}
         currentReview={currentReview}

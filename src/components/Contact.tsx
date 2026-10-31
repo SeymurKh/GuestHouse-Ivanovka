@@ -5,22 +5,28 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Mail, MapPin, Star } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
+import { InstagramIcon } from '@/components/ui/instagram-icon'
 import { Review } from '@/types'
 import { useLanguage } from '@/lib/LanguageContext'
 import { getLocalizedValue } from '@/lib/localize'
+import { parseInstagramHandle } from '@/lib/parse'
 
 interface ContactProps {
   phone: string
   email: string
+  instagram: string
   address?: string
   reviews: Review[]
   currentReview: number
   setCurrentReview: (index: number) => void
 }
 
-export function Contact({ phone, email, address, reviews, currentReview, setCurrentReview }: ContactProps) {
+export function Contact({ phone, email, instagram, address, reviews, currentReview, setCurrentReview }: ContactProps) {
   const { t, lang } = useLanguage()
   const displayAddress = getLocalizedValue(address, lang, t.contact.addressValue)
+  const instagramUrl = instagram.trim() || 'https://www.instagram.com/roomguesthouses/'
+  const instagramHandle = parseInstagramHandle(instagramUrl)
+  const instagramDisplay = instagramHandle ? `@${instagramHandle}` : '@roomguesthouses'
 
   return (
     <section id="contact" className="relative z-10 min-h-screen flex items-center py-16 text-white">
@@ -43,6 +49,15 @@ export function Contact({ phone, email, address, reviews, currentReview, setCurr
                 <div>
                   <p className="text-xs text-white/60">WhatsApp</p>
                   <p className="font-medium text-[#b8ad9a]">{phone}</p>
+                </div>
+              </a>
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)] group-hover:bg-[linear-gradient(45deg,#E07620,#C4275C,#6D2B96)] transition-colors">
+                  <InstagramIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/60">Instagram</p>
+                  <p className="font-medium text-[#b8ad9a]">{instagramDisplay}</p>
                 </div>
               </a>
               <a href={`mailto:${email}`} className="flex items-center gap-3 group">

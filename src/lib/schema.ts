@@ -75,7 +75,8 @@ export function createDb(): Database.Database {
       id TEXT PRIMARY KEY,
       phone TEXT NOT NULL,
       email TEXT,
-      address TEXT
+      address TEXT,
+      instagram TEXT NOT NULL DEFAULT ''
     );
 
     CREATE TABLE IF NOT EXISTS GalleryImage (
@@ -89,6 +90,13 @@ export function createDb(): Database.Database {
   // Migration for existing databases: add bookingUrl if missing
   try {
     db.exec("ALTER TABLE Room ADD COLUMN bookingUrl TEXT NOT NULL DEFAULT ''")
+  } catch {
+    // Column already exists — nothing to do
+  }
+
+  // Migration for existing databases: add instagram if missing
+  try {
+    db.exec("ALTER TABLE SiteSettings ADD COLUMN instagram TEXT NOT NULL DEFAULT ''")
   } catch {
     // Column already exists — nothing to do
   }
@@ -157,6 +165,7 @@ export function mapSettingsRow(row: Record<string, unknown>) {
     phone: row.phone as string,
     email: (row.email as string) || null,
     address: (row.address as string) || null,
+    instagram: (row.instagram as string) || '',
   }
 }
 

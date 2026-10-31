@@ -6,10 +6,13 @@ import { parseImages } from '@/lib/parse'
 import { demoRooms, demoReviews, demoSettings } from '@/lib/demo-data'
 import { galleryImages as demoGalleryImages } from '@/lib/content-manifest'
 
+const DEFAULT_INSTAGRAM_URL = 'https://www.instagram.com/roomguesthouses/'
+
 interface SiteSettings {
   phone: string
   email: string
   address: string
+  instagram: string
 }
 
 export function useSiteData() {
@@ -18,6 +21,7 @@ export function useSiteData() {
   const [phone, setPhone] = useState('+994508080069')
   const [email, setEmail] = useState('roomcommunityofficial@gmail.com')
   const [address, setAddress] = useState('')
+  const [instagram, setInstagram] = useState(DEFAULT_INSTAGRAM_URL)
   const [gallery, setGallery] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -47,6 +51,7 @@ export function useSiteData() {
         if (demoSettings.phone) setPhone(demoSettings.phone)
         if (demoSettings.email) setEmail(demoSettings.email)
         if (demoSettings.address) setAddress(demoSettings.address)
+        if (demoSettings.instagram) setInstagram(demoSettings.instagram)
         setGallery(demoGalleryImages)
         setLoading(false)
         return
@@ -75,6 +80,7 @@ export function useSiteData() {
           if (settingsData?.phone) setPhone(settingsData.phone)
           if (settingsData?.email) setEmail(settingsData.email)
           if (settingsData?.address) setAddress(settingsData.address || '')
+          if (settingsData?.instagram) setInstagram(settingsData.instagram)
         }
 
         if (galleryRes.ok) {
@@ -112,6 +118,7 @@ export function useSiteData() {
         if (data?.phone) setPhone(data.phone)
         if (data?.email) setEmail(data.email)
         setAddress(data?.address || '')
+        setInstagram(data?.instagram || DEFAULT_INSTAGRAM_URL)
       }
     } catch {
       // Failed to refresh settings
@@ -138,6 +145,7 @@ export function useSiteData() {
     phone,
     email,
     address,
+    instagram,
     gallery,
     loading,
     allRoomImages,

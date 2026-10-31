@@ -40,13 +40,14 @@ export const POST = withAdminAuth(async () => {
     const settingsRow = db.prepare('SELECT COUNT(*) as count FROM SiteSettings').get() as { count: number }
     if (settingsRow.count === 0) {
       db.prepare(`
-        INSERT INTO SiteSettings (id, phone, email, address)
-        VALUES (@id, @phone, @email, @address)
+        INSERT INTO SiteSettings (id, phone, email, address, instagram)
+        VALUES (@id, @phone, @email, @address, @instagram)
       `).run({
         id: generateId(),
         phone: demoSettings.phone,
         email: demoSettings.email,
         address: demoSettings.address,
+        instagram: demoSettings.instagram || '',
       })
     }
 

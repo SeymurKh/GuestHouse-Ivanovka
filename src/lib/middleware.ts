@@ -170,6 +170,13 @@ export const validateInput = {
       }
     }
 
+    if (data.instagram !== undefined && data.instagram !== null && data.instagram !== '') {
+      const url = String(data.instagram)
+      if (!/^https?:\/\/.+/i.test(url) || url.length > 500) {
+        errors.push('Instagram URL must be a valid http(s) URL')
+      }
+    }
+
     if (data.address && typeof data.address === 'string' && data.address.length > 200) {
       errors.push('Address must be under 200 characters')
     }

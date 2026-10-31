@@ -58,10 +58,12 @@ const demoSettings = settings
       phone: settings.phone,
       email: settings.email || '',
       address: settings.address || '',
+      instagram: settings.instagram || '',
     }
   : {
       phone: '+994508080069',
       email: 'roomcommunityofficial@gmail.com',
+      instagram: 'https://www.instagram.com/roomguesthouses/',
       address: JSON.stringify({ ru: 'Азербайджан, г. Исмаиллы, посёлок Ивановка', az: '', en: '' }),
     }
 

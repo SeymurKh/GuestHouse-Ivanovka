@@ -167,5 +167,6 @@ export const demoReviews: Review[] = [
 export const demoSettings = {
   "phone": "+994508080069",
   "email": "roomcommunityofficial@gmail.com",
+  "instagram": "https://www.instagram.com/roomguesthouses/",
   "address": "{\"ru\":\"Азербайджан, г. Исмаиллы, посёлок Ивановка\",\"az\":\"\",\"en\":\"\"}"
 }

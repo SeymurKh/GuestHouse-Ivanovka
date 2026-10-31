@@ -132,3 +132,11 @@ export const parseImages = (imagesValue: unknown): string[] => {
 
   return []
 }
+
+// Extract Instagram handle from a profile URL
+// e.g. 'https://www.instagram.com/roomguesthouses/' -> 'roomguesthouses'
+export const parseInstagramHandle = (url: unknown): string => {
+  if (!url || typeof url !== 'string') return ''
+  const match = url.match(/(?:https?:\/\/)?(?:www\.)?instagram\.com\/([^/?#]+)/i)
+  return match ? match[1].replace(/^@/, '') : ''
+}

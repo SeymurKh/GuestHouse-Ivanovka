@@ -33,7 +33,7 @@ export async function GET() {
 export const PUT = withAdminAuth(async (request: NextRequest) => {
   try {
     const body = await request.json()
-    const { phone, email, address } = body
+    const { phone, email, address, instagram } = body
 
     if (!phone || typeof phone !== 'string' || phone.trim().length === 0 || phone.length > 50) {
       return NextResponse.json({ error: 'Phone is required and under 50 characters' }, { status: 400 })
@@ -43,6 +43,13 @@ export const PUT = withAdminAuth(async (request: NextRequest) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(email)) {
         return NextResponse.json({ error: 'Invalid email format' }, { status: 400 })
+      }
+    }
+
+    if (instagram !== undefined && instagram !== null && instagram !== '') {
+      const url = String(instagram)
+      if (!/^https?:\/\/.+/i.test(url) || url.length > 500) {
+        return NextResponse.json({ error: 'Instagram must be a valid http(s) URL' }, { status: 400 })
       }
     }
 
@@ -57,25 +64,28 @@ export const PUT = withAdminAuth(async (request: NextRequest) => {
         UPDATE SiteSettings SET
           phone = @phone,
           email = @email,
-          address = @address
+          address = @address,
+          instagram = @instagram
         WHERE id = @id
       `).run({
         id: existing.id,
         phone: sanitize.phone(phone),
         email: sanitize.email(email || ''),
         address: addressValue,
+        instagram: sanitize.text(String(instagram || '')),
       })
       row = db.prepare('SELECT * FROM SiteSettings WHERE id = ?').get(existing.id) as Record<string, unknown>
     } else {
       const id = generateId()
       db.prepare(`
-        INSERT INTO SiteSettings (id, phone, email, address)
-        VALUES (@id, @phone, @email, @address)
+        INSERT INTO SiteSettings (id, phone, email, address, instagram)
+        VALUES (@id, @phone, @email, @address, @instagram)
       `).run({
         id,
         phone: sanitize.phone(phone),
         email: sanitize.email(email || ''),
         address: addressValue,
+        instagram: sanitize.text(String(instagram || '')),
       })
       row = db.prepare('SELECT * FROM SiteSettings WHERE id = ?').get(id) as Record<string, unknown>
     }

@@ -5,6 +5,7 @@ import {
   parseLocalizedAmenities,
   parseAdvantages,
   parseLocalizedAdvantages,
+  parseInstagramHandle,
 } from '../lib/parse'
 
 describe('parse utilities', () => {
@@ -41,5 +42,23 @@ describe('parse utilities', () => {
 
   it('returns empty arrays for invalid localized advantages', () => {
     expect(parseLocalizedAdvantages('invalid-json', 'ru')).toEqual([])
+  })
+})
+
+describe('parseInstagramHandle', () => {
+  it('extracts handle from a full profile URL', () => {
+    expect(parseInstagramHandle('https://www.instagram.com/roomguesthouses/')).toBe('roomguesthouses')
+  })
+
+  it('handles URLs without protocol, with @ and query params', () => {
+    expect(parseInstagramHandle('instagram.com/some.profile?hl=en')).toBe('some.profile')
+    expect(parseInstagramHandle('https://instagram.com/@roomguesthouses')).toBe('roomguesthouses')
+  })
+
+  it('returns empty string for non-instagram or invalid input', () => {
+    expect(parseInstagramHandle('https://example.com/x')).toBe('')
+    expect(parseInstagramHandle('')).toBe('')
+    expect(parseInstagramHandle(null)).toBe('')
+    expect(parseInstagramHandle(42)).toBe('')
   })
 })

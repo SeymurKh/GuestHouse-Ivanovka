@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { verifyPassword, verifyAdminToken, generateAdminToken } from '../lib/middleware'
+import { verifyPassword, verifyAdminToken, generateAdminToken, validateInput } from '../lib/middleware'
 
 describe('middleware utilities', () => {
   const originalEnv = process.env
@@ -40,5 +40,29 @@ describe('middleware utilities', () => {
     delete process.env.ADMIN_TOKEN
     delete process.env.ADMIN_PASSWORD
     expect(verifyAdminToken('anything')).toBe(false)
+  })
+})
+
+describe('validateInput.settings', () => {
+  it('accepts valid settings with instagram URL', () => {
+    const result = validateInput.settings({
+      phone: '+994508080069',
+      instagram: 'https://www.instagram.com/roomguesthouses/',
+    })
+    expect(result.isValid).toBe(true)
+  })
+
+  it('rejects invalid instagram URL', () => {
+    const result = validateInput.settings({
+      phone: '+994508080069',
+      instagram: 'not-a-url',
+    })
+    expect(result.isValid).toBe(false)
+    expect(result.errors).toContain('Instagram URL must be a valid http(s) URL')
+  })
+
+  it('allows empty instagram', () => {
+    const result = validateInput.settings({ phone: '+994508080069', instagram: '' })
+    expect(result.isValid).toBe(true)
   })
 })
